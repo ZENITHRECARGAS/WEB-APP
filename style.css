@@ -1,0 +1,65 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0a0b10;
+    color: #e2e8f0;
+}
+
+.font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.cyber-grid {
+    background-image: linear-gradient(to right, rgba(42, 47, 76, 0.15) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(42, 47, 76, 0.15) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+.glow-text-cyan {
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.3);
+}
+
+.glow-text-purple {
+    text-shadow: 0 0 10px rgba(176, 0, 255, 0.6), 0 0 20px rgba(176, 0, 255, 0.3);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0b10;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2a2f4c;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00f0ff;
+}
+/* Ajustes responsivos para Android */
+@media (max-width: 640px) {
+    /* Evitar desbordamientos en tarjetas y modales */
+    .max-w-lg, .max-w-md, .max-w-3xl {
+        width: 100% !important;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        padding: 1rem !important;
+    }
+
+    /* Reducir tamaño de textos de títulos principales en celulares */
+    h2.font-orbitron {
+        font-size: 1.5rem !important;
+    }
+
+    /* Adaptar botones de pasarelas de pago y filtros en columna o grid compacto */
+    .grid-cols-5 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+/* Permitir scroll suave en bandejas y tablas móviles */
+#notifications-list, #admin-orders-container, #admin-prices-list {
+    -webkit-overflow-scrolling: touch;
+}
