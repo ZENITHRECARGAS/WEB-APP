@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00f0ff">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ZenithRecargas | Recargas Gaming & Diamantes</title>
@@ -553,6 +555,22 @@
             document.getElementById('receipt-modal').classList.add('hidden');
         }
     </script>
+
+    <!-- MODAL DE PAÍS NO DISPONIBLE -->
+<div id="country-restriction-overlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-cyber-dark/95 backdrop-blur-xl hidden p-4">
+    <div class="bg-cyber-card border border-red-500/40 w-full max-w-md rounded-3xl p-8 space-y-6 text-center shadow-2xl relative">
+        <div class="w-16 h-16 mx-auto rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-3xl text-red-400">
+            <i class="fa-solid fa-globe-slash"></i>
+        </div>
+        <div class="space-y-2">
+            <h2 class="font-orbitron font-black text-2xl text-white">PAÍS NO DISPONIBLE</h2>
+            <p class="text-xs text-gray-300">Lo sentimos, nuestra plataforma de recargas opera exclusivamente en <span class="text-cyber-neonCyan font-bold">Ecuador</span> por el momento.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-cyber-dark border border-cyber-border">
+            <p class="text-xs text-amber-400 font-semibold">Pronto llegaremos ahí 🚀</p>
+        </div>
+    </div>
+</div>
 
     <!-- App Logic Script -->
     <script src="app.js" type="module"></script>
