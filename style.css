@@ -1,29 +1,31 @@
+/* ==========================================
+   ZENITHRECARGAS - TIENDA PRINCIPAL (CSS)
+   ========================================== */
+
+/* Fondo ciberpunk de la tienda */
 body {
-    font-family: 'Inter', sans-serif;
     background-color: #0a0b10;
-    color: #e2e8f0;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
 }
 
+.cyber-grid {
+    background-color: #0a0b10;
+    background-image: 
+        linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* Tipografías */
 .font-orbitron {
     font-family: 'Orbitron', sans-serif;
 }
 
-.cyber-grid {
-    background-image: linear-gradient(to right, rgba(42, 47, 76, 0.15) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(42, 47, 76, 0.15) 1px, transparent 1px);
-    background-size: 30px 30px;
-}
-
-.glow-text-cyan {
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.3);
-}
-
-.glow-text-purple {
-    text-shadow: 0 0 10px rgba(176, 0, 255, 0.6), 0 0 20px rgba(176, 0, 255, 0.3);
-}
-
+/* Personalización de Scrollbars en modales y chats */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -31,35 +33,71 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #2a2f4c;
-    border-radius: 4px;
+    background: #121420;
+    border: 1px solid #2a2f4c;
+    border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: #00f0ff;
 }
-/* Ajustes responsivos para Android */
+
+/* Sombras y resplandores neón */
+.shadow-neon-cyan {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+}
+
+.shadow-neon-purple {
+    box-shadow: 0 0 20px rgba(176, 0, 255, 0.3);
+}
+
+.shadow-neon-pink {
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.3);
+}
+
+/* Transiciones para las tarjetas de productos */
+.product-card {
+    transition: all 0.25s ease-in-out;
+}
+
+.product-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Ajustes de tablas en la sección de historial y billetera */
+#walletHistoryTableContainer, #orders-list-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ==========================================
+   REGLAS DE ADAPTACIÓN PARA CELULARES ANDROID
+   ========================================== */
 @media (max-width: 640px) {
-    /* Evitar desbordamientos en tarjetas y modales */
-    .max-w-lg, .max-w-md, .max-w-3xl {
-        width: 100% !important;
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
-        padding: 1rem !important;
+    body {
+        font-size: 14px;
     }
 
-    /* Reducir tamaño de textos de títulos principales en celulares */
-    h2.font-orbitron {
-        font-size: 1.5rem !important;
+    /* Prevenir que tablas desborden la pantalla horizontalmente */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 
-    /* Adaptar botones de pasarelas de pago y filtros en columna o grid compacto */
+    /* Adaptar botones de pasarelas de pago y filtros */
     .grid-cols-5 {
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     }
-}
 
-/* Permitir scroll suave en bandejas y tablas móviles */
-#notifications-list, #admin-orders-container, #admin-prices-list {
-    -webkit-overflow-scrolling: touch;
+    /* Ajustes para modales en móviles */
+    #checkout-modal > div,
+    #deposit-modal > div,
+    #withdraw-modal > div,
+    #receipt-modal > div,
+    #country-restriction-overlay > div {
+        width: 92% !important;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
 }

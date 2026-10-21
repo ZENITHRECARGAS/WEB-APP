@@ -1,51 +1,74 @@
-body {
-    font-family: 'Inter', sans-serif;
+/* ==========================================
+   ZENITHRECARGAS - PANEL DE ADMINISTRACIÓN (CSS)
+   ========================================== */
+
+/* Fondo cibernético con rejilla */
+.cyber-grid {
     background-color: #0a0b10;
-    color: #e2e8f0;
+    background-image: 
+        linear-gradient(to right, rgba(42, 47, 76, 0.15) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(42, 47, 76, 0.15) 1px, transparent 1px);
+    background-size: 30px 30px;
+    font-family: 'Inter', sans-serif;
 }
 
+/* Personalización de la barra de desplazamiento */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0b10;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2a2f4c;
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00f0ff;
+}
+
+/* Tipografía de títulos */
 .font-orbitron {
     font-family: 'Orbitron', sans-serif;
 }
 
-.cyber-grid {
-    background-image: linear-gradient(to right, rgba(42, 47, 76, 0.15) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(42, 47, 76, 0.15) 1px, transparent 1px);
-    background-size: 30px 30px;
+/* Efectos de brillo e iluminación Neón */
+.shadow-neon-cyan {
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
 }
 
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: #0a0b10;
-}
-::-webkit-scrollbar-thumb {
-    background: #2a2f4c;
-    border-radius: 4px;
-}
-/* Ajustes responsivos para Android */
-@media (max-width: 640px) {
-    /* Evitar desbordamientos en tarjetas y modales */
-    .max-w-lg, .max-w-md, .max-w-3xl {
-        width: 100% !important;
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
-        padding: 1rem !important;
-    }
-
-    /* Reducir tamaño de textos de títulos principales en celulares */
-    h2.font-orbitron {
-        font-size: 1.5rem !important;
-    }
-
-    /* Adaptar botones de pasarelas de pago y filtros en columna o grid compacto */
-    .grid-cols-5 {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
+.shadow-neon-pink {
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.35);
 }
 
-/* Permitir scroll suave en bandejas y tablas móviles */
-#notifications-list, #admin-orders-container, #admin-prices-list {
+/* Estilos de tabla y contenedores desplazables para Android */
+#admin-orders-container, 
+#admin-prices-list, 
+#admin-users-list, 
+#admin-chat-messages {
     -webkit-overflow-scrolling: touch;
+}
+
+/* Optimización para pantallas pequeñas de celulares Android */
+@media (max-width: 640px) {
+    body {
+        font-size: 13px;
+    }
+
+    input, select, textarea, button {
+        max-width: 100%;
+    }
+
+    /* Modales centrados y ajustados en móviles */
+    #addProductModal > div, 
+    #ocrPreviewModal > div,
+    #admin-login-overlay > div {
+        width: 95% !important;
+        padding: 1.25rem !important;
+        margin: auto;
+    }
 }
