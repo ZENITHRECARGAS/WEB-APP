@@ -1,15 +1,26 @@
 {
+  "id": "com.zenithrecargas.app",
   "name": "ZenithRecargas",
   "short_name": "Zenith",
-  "start_url": "/index.html",
+  "description": "Tienda oficial de recargas de diamantes, robux y monedas para juegos móviles.",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#0a0b10",
   "theme_color": "#00f0ff",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "https://cdn-icons-png.flaticon.com/512/808/808439.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/808/808439.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
