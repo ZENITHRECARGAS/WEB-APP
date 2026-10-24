@@ -71,6 +71,7 @@
                 <button onclick="switchTab('wallet')" id="nav-btn-wallet" class="text-gray-400 hover:text-white pb-1 transition-all"><i class="fa-solid fa-wallet mr-2"></i>Billetera / Saldo</button>
                 <button onclick="switchTab('history')" id="nav-btn-history" class="text-gray-400 hover:text-white pb-1 transition-all"><i class="fa-solid fa-clock-rotate-left mr-2"></i>Mis Órdenes</button>
                 <button onclick="switchTab('support')" id="nav-btn-support" class="text-gray-400 hover:text-white pb-1 transition-all"><i class="fa-solid fa-headset mr-2"></i>Ayuda / Soporte</button>
+                <button onclick="switchTab('subscriptions')" id="nav-btn-subscriptions" class="text-gray-400 hover:text-white pb-1 transition-all"><i class="fa-solid fa-tv mr-2"></i>Suscripciones</button>
             </nav>
 
             <!-- User Auth Profile & Notifications Tray -->
@@ -245,6 +246,49 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: SUBSCRIPTIONS -->
+        <section id="tab-subscriptions" class="hidden space-y-6">
+            <div class="bg-cyber-card p-6 rounded-3xl border border-cyber-border space-y-4">
+                <div>
+                    <h2 class="font-orbitron font-bold text-xl sm:text-2xl text-white">Suscripciones Streaming & Más</h2>
+                    <p class="text-gray-400 text-xs">Compra cuentas oficiales (Netflix, etc.) con duración personalizada pagando con tu Saldo Billetera.</p>
+                </div>
+
+                <!-- Grid de Planes de Suscripción -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+                    <!-- Netflix Card -->
+                    <div class="bg-cyber-dark p-5 rounded-2xl border border-cyber-border flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-red-600/20 text-red-500 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-N"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Netflix Cuenta Completa / Perfil</h4>
+                            <p class="text-xs text-gray-400">Acceso estable con garantía y duración a medida.</p>
+                        </div>
+                        <div class="pt-2 border-t border-cyber-border flex items-center justify-between">
+                            <span class="font-orbitron font-bold text-cyber-neonCyan text-base">$3.50 <span class="text-[10px] text-gray-400 font-sans">/ mes base</span></span>
+                            <button onclick="openSubModal('Netflix', 3.50)" class="px-4 py-2 rounded-xl bg-cyber-neonCyan text-black font-bold text-xs uppercase shadow-neon-cyan">Comprar</button>
+                        </div>
+                    </div>
+
+                    <!-- Otro Servicio (Ej. Spotify / Disney+) -->
+                    <div class="bg-cyber-dark p-5 rounded-2xl border border-cyber-border flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-green-600/20 text-green-500 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-music"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Spotify Premium</h4>
+                            <p class="text-xs text-gray-400">Tu propia cuenta o renovación individual.</p>
+                        </div>
+                        <div class="pt-2 border-t border-cyber-border flex items-center justify-between">
+                            <span class="font-orbitron font-bold text-cyber-neonCyan text-base">$2.00 <span class="text-[10px] text-gray-400 font-sans">/ mes base</span></span>
+                            <button onclick="openSubModal('Spotify Premium', 2.00)" class="px-4 py-2 rounded-xl bg-cyber-neonCyan text-black font-bold text-xs uppercase shadow-neon-cyan">Comprar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -694,6 +738,42 @@
             <div class="p-3 rounded-xl bg-cyber-dark border border-cyber-border">
                 <p class="text-xs text-amber-400 font-semibold">Pronto llegaremos ahí 🚀</p>
             </div>
+        </div>
+    </div>
+
+    <!-- MODAL: COMPRAR SUSCRIPCIÓN -->
+    <div id="sub-checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-3">
+        <div class="bg-cyber-card border border-cyber-border w-full max-w-md rounded-3xl p-6 space-y-4 relative shadow-2xl">
+            <div class="flex items-center justify-between border-b border-cyber-border pb-3">
+                <div>
+                    <h3 id="sub-modal-title" class="font-orbitron font-bold text-white text-sm">Comprar Suscripción</h3>
+                    <p class="text-[10px] text-cyber-neonGreen">Pago exclusivo con Saldo Billetera</p>
+                </div>
+                <button onclick="closeSubModal()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="block text-gray-400 mb-1 font-semibold uppercase">Correo Electrónico de Contacto</label>
+                    <input type="email" id="sub-email" placeholder="tucorreo@gmail.com" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2.5 text-white text-xs focus:outline-none focus:border-cyber-neonCyan">
+                </div>
+                <div>
+                    <label class="block text-gray-400 mb-1 font-semibold uppercase">Número de Teléfono / WhatsApp</label>
+                    <input type="tel" id="sub-phone" placeholder="0991234567" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2.5 text-white text-xs focus:outline-none focus:border-cyber-neonCyan">
+                </div>
+                <div>
+                    <label class="block text-gray-400 mb-1 font-semibold uppercase">Duración Personalizada (Meses / Días)</label>
+                    <input type="text" id="sub-duration" placeholder="Ej. 3 Meses o 45 Días" oninput="calculateSubTotal()" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2.5 text-white text-xs focus:outline-none focus:border-cyber-neonCyan font-bold">
+                </div>
+                <div class="p-3 bg-cyber-dark rounded-xl border border-cyber-border flex justify-between items-center">
+                    <span class="text-gray-400">Total a Descontar de Billetera:</span>
+                    <span id="sub-total-price" class="font-orbitron font-bold text-cyber-neonGreen text-base">$0.00</span>
+                </div>
+            </div>
+
+            <button onclick="processSubscriptionPurchase()" class="w-full py-3.5 rounded-xl bg-cyber-neonGreen text-black font-bold text-xs uppercase tracking-wider shadow-neon-green hover:opacity-95 transition-all">
+                Pagar con Saldo e Ir al Soporte
+            </button>
         </div>
     </div>
 
