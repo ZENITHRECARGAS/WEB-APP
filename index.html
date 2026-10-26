@@ -113,13 +113,15 @@
             </div>
         </div>
 
-        <!-- Mobile Nav Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-cyber-card border-b border-cyber-border px-4 py-3 space-y-2">
-            <button onclick="switchTab('catalog'); toggleMobileMenu();" class="block w-full text-left text-cyber-neonCyan py-2 text-sm font-medium"><i class="fa-solid fa-store mr-2"></i>Catálogo</button>
-            <button onclick="switchTab('wallet'); toggleMobileMenu();" class="block w-full text-left text-gray-300 py-2 text-sm font-medium"><i class="fa-solid fa-wallet mr-2"></i>Billetera / Saldo</button>
-            <button onclick="switchTab('history'); toggleMobileMenu();" class="block w-full text-left text-gray-300 py-2 text-sm font-medium"><i class="fa-solid fa-clock-rotate-left mr-2"></i>Mis Órdenes</button>
-            <button onclick="switchTab('support'); toggleMobileMenu();" class="block w-full text-left text-gray-300 py-2 text-sm font-medium"><i class="fa-solid fa-headset mr-2"></i>Ayuda / Soporte</button>
-        </div>
+<!-- Mobile Nav Menu -->
+<div id="mobile-menu" class="hidden md:hidden bg-cyber-card border-b border-cyber-border px-4 py-3 space-y-2">
+  <button onclick="switchTab('catalog'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Catálogo</button>
+  <button onclick="switchTab('wallet'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Billetera</button>
+  <!-- AGREGA TU BOTÓN DE SUSCRIPCIÓN AQUÍ -->
+  <button onclick="switchTab('subscriptions'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Suscripciones</button>
+  <button onclick="switchTab('history'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Historial</button>
+  <button onclick="switchTab('support'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Soporte</button>
+</div>
     </header>
 
     <!-- Main Content Container -->
