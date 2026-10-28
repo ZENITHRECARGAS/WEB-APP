@@ -92,6 +92,14 @@
                             </h4>
                             <button onclick="markAllNotificationsRead()" class="text-[10px] text-cyber-neonCyan hover:underline">Marcar leídas</button>
                         </div>
+
+                        <!-- Botón de Prueba de Notificación -->
+                        <div class="pb-2 border-b border-cyber-border">
+                            <button onclick="testClientNotification()" class="w-full py-2 px-3 rounded-xl bg-cyan-500/20 text-cyber-neonCyan border border-cyan-500/40 text-xs font-bold hover:bg-cyan-500 hover:text-black transition-all flex items-center justify-center space-x-2 shadow-neon-cyan">
+                                <i class="fa-solid fa-volume-high"></i>
+                                <span>Probar Notificación y Audio</span>
+                            </button>
+                        </div>
                         
                         <div id="notifications-list" class="max-h-72 overflow-y-auto space-y-2">
                             <p class="text-xs text-gray-500 text-center py-4">Inicia sesión con Google para ver tus avisos y mensajes.</p>
@@ -113,15 +121,14 @@
             </div>
         </div>
 
-<!-- Mobile Nav Menu -->
-<div id="mobile-menu" class="hidden md:hidden bg-cyber-card border-b border-cyber-border px-4 py-3 space-y-2">
-  <button onclick="switchTab('catalog'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Catálogo</button>
-  <button onclick="switchTab('wallet'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Billetera</button>
-  <!-- AGREGA TU BOTÓN DE SUSCRIPCIÓN AQUÍ -->
-  <button onclick="switchTab('subscriptions'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Suscripciones</button>
-  <button onclick="switchTab('history'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Historial</button>
-  <button onclick="switchTab('support'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Soporte</button>
-</div>
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cyber-card border-b border-cyber-border px-4 py-3 space-y-2">
+            <button onclick="switchTab('catalog'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Catálogo</button>
+            <button onclick="switchTab('wallet'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Billetera</button>
+            <button onclick="switchTab('subscriptions'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Suscripciones</button>
+            <button onclick="switchTab('history'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Historial</button>
+            <button onclick="switchTab('support'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Soporte</button>
+        </div>
     </header>
 
     <!-- Main Content Container -->
