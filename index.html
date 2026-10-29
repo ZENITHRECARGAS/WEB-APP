@@ -74,20 +74,15 @@
             <!-- User Auth Profile, Location & Notifications Tray -->
             <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
                 
-                <!-- SELECTOR / INDICADOR DE CIUDAD EN VIVO -->
-                <div class="flex items-center space-x-1.5 bg-cyber-dark/80 border border-cyber-border px-2.5 py-1.5 rounded-xl text-xs shadow-md">
-                    <i class="fa-solid fa-location-dot text-cyber-neonPink animate-pulse text-xs"></i>
-                    <div class="flex flex-col">
+                <!-- BOTÓN INDICADOR DE UBICACIÓN EN VIVO (ABRE MODAL DE FILTRADO EN CASCADA) -->
+                <button onclick="openLocationModal()" class="flex items-center space-x-2 bg-cyber-dark/80 border border-cyber-border px-3 py-1.5 rounded-xl text-xs shadow-md hover:border-cyber-neonCyan transition-all group">
+                    <i class="fa-solid fa-location-dot text-cyber-neonPink animate-pulse text-xs group-hover:scale-110 transition-transform"></i>
+                    <div class="flex flex-col text-left">
                         <span class="text-[7px] text-gray-400 uppercase tracking-widest font-orbitron">Ubicación</span>
-                        <select id="user-city-selector" onchange="changeUserCity(this.value)" class="bg-transparent text-cyber-neonCyan font-bold focus:outline-none cursor-pointer text-[10px] sm:text-xs">
-                            <option value="Sabanilla" class="bg-cyber-dark text-white">Sabanilla</option>
-                            <option value="Valle de la Virgen" class="bg-cyber-dark text-white">Valle de la Virgen</option>
-                            <option value="Pedro Carbo" class="bg-cyber-dark text-white">Pedro Carbo</option>
-                            <option value="Guayaquil" class="bg-cyber-dark text-white">Guayaquil</option>
-                            <option value="Daule" class="bg-cyber-dark text-white">Daule</option>
-                        </select>
+                        <span id="current-location-display" class="text-cyber-neonCyan font-bold text-[10px] sm:text-xs truncate max-w-[100px] sm:max-w-[130px]">Sabanilla</span>
                     </div>
-                </div>
+                    <i class="fa-solid fa-chevron-down text-[9px] text-gray-400"></i>
+                </button>
 
                 <!-- Botón de Bandeja de Notificaciones -->
                 <div class="relative">
@@ -390,6 +385,147 @@
 
     </main>
 
+    <!-- BANNER DE COOKIES PROFESIONAL (ANDROID & DESKTOP) -->
+    <div id="cookie-banner" class="hidden fixed bottom-3 left-3 right-3 sm:left-6 sm:bottom-6 z-50 bg-cyber-card border border-cyber-neonCyan p-4 rounded-2xl shadow-2xl space-y-3 max-w-lg mx-auto backdrop-blur-md">
+        <div class="flex items-start space-x-3">
+            <div class="w-9 h-9 rounded-xl bg-cyan-500/20 text-cyber-neonCyan flex items-center justify-center flex-shrink-0 text-base">
+                <i class="fa-solid fa-cookie-bite"></i>
+            </div>
+            <div class="space-y-1">
+                <h4 class="font-orbitron font-bold text-white text-xs sm:text-sm">Aviso de Privacidad y Cookies</h4>
+                <p class="text-[11px] text-gray-300 leading-relaxed">
+                    Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación, verificar transacciones y seguridad en ZenithRecargas.
+                </p>
+            </div>
+        </div>
+        
+        <div class="flex flex-wrap items-center justify-end gap-2 pt-1">
+            <a href="politica-privacidad.html" class="text-[11px] text-cyber-neonCyan underline mr-auto hover:text-white transition-colors">Ver Información</a>
+            <button onclick="handleCookieChoice('reject')" class="px-3 py-2 rounded-xl bg-cyber-dark border border-cyber-border text-gray-300 font-bold text-[11px] hover:text-white transition-all">Rechazar</button>
+            <button onclick="handleCookieChoice('accept')" class="px-3.5 py-2 rounded-xl bg-cyber-neonCyan text-black font-bold text-[11px] uppercase tracking-wider shadow-neon-cyan hover:opacity-90 transition-all">Aceptar Todo</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA DE APAGADO / MANTENIMIENTO GLOBAL (CONTROLADO DESDE FIRESTORE) -->
+    <div id="maintenance-screen" class="hidden fixed inset-0 z-[999] bg-cyber-dark flex items-center justify-center p-6 text-center">
+        <div class="max-w-md w-full bg-cyber-card border-2 border-red-500 rounded-3xl p-8 space-y-6 shadow-[0_0_30px_rgba(255,0,0,0.3)] animate-pulse">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-red-500/20 text-red-500 flex items-center justify-center text-3xl shadow-lg">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="space-y-2">
+                <h2 class="font-orbitron font-black text-white text-xl sm:text-2xl tracking-wide">SISTEMA CERRADO</h2>
+                <p id="maintenance-msg" class="text-xs sm:text-sm text-gray-300 leading-relaxed uppercase font-medium">
+                    HOLA ESTIMADO USUARIO ESTA PAGINA WEB ESTA EN MATENIMIENTO O CERRADO POR HORA LA PAGINA SE ABRE SI EL ADMINISTRADOR LO DESEA
+                </p>
+            </div>
+            <div class="pt-2 border-t border-cyber-border">
+                <span class="text-[10px] text-gray-500 font-mono tracking-widest uppercase">ZenithRecargas Security Protocol</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE CAMBIO DE UBICACIÓN VIP EN CASCADA (HEADER) -->
+    <div id="location-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden p-3">
+        <div class="bg-cyber-card border-2 border-cyber-neonCyan w-full max-w-md rounded-3xl p-5 space-y-4 relative shadow-neon-cyan max-h-[95vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-cyber-border pb-2">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-map-location-dot text-cyber-neonCyan text-lg"></i>
+                    <h3 class="font-orbitron font-bold text-white text-sm">Cambiar Ubicación VIP</h3>
+                </div>
+                <button onclick="closeLocationModal()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <p class="text-[11px] text-gray-400">Selecciona el sector exacto para explorar el Ranking VIP de recargadores en esa zona.</p>
+
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="block text-gray-300 font-bold uppercase tracking-wider mb-1">1. Región</label>
+                    <select id="header-region-select" onchange="updateHeaderProvincesList(this.value)" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2 text-cyber-neonCyan font-bold focus:outline-none focus:border-cyber-neonCyan cursor-pointer">
+                        <option value="Costa">Costa</option>
+                        <option value="Sierra">Sierra</option>
+                        <option value="Oriente">Oriente</option>
+                        <option value="Galápagos">Galápagos</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 font-bold uppercase tracking-wider mb-1">2. Provincia</label>
+                    <select id="header-province-select" onchange="updateHeaderCantonsList(document.getElementById('header-region-select').value, this.value)" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2 text-white font-bold focus:outline-none focus:border-cyber-neonCyan cursor-pointer">
+                        <!-- Dinámico -->
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 font-bold uppercase tracking-wider mb-1">3. Cantón / Ciudad</label>
+                    <select id="header-canton-select" onchange="updateHeaderSectorsList(document.getElementById('header-region-select').value, document.getElementById('header-province-select').value, this.value)" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2 text-white font-bold focus:outline-none focus:border-cyber-neonCyan cursor-pointer">
+                        <!-- Dinámico -->
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 font-bold uppercase tracking-wider mb-1">4. Parroquia / Sector</label>
+                    <select id="header-sector-select" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2 text-white font-bold focus:outline-none focus:border-cyber-neonCyan cursor-pointer">
+                        <!-- Dinámico -->
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="applyHeaderLocationChange()" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyber-neonCyan to-blue-600 text-black font-black text-xs uppercase tracking-wider shadow-neon-cyan hover:opacity-90 transition-all">
+                Ver Top Recargadores de este Sector
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DE BIENVENIDA Y REGISTRO COMPLETO EN CASCADA -->
+    <div id="onboarding-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden p-3">
+        <div class="bg-cyber-card border-2 border-cyber-neonCyan w-full max-w-md rounded-3xl p-6 space-y-4 relative shadow-neon-cyan max-h-[95vh] overflow-y-auto">
+            <div class="text-center space-y-1">
+                <div class="w-12 h-12 mx-auto rounded-2xl bg-cyan-500/20 text-cyber-neonCyan flex items-center justify-center text-2xl mb-2">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                </div>
+                <h3 class="font-orbitron font-black text-white text-lg sm:text-xl">¡BIENVENIDO A ZENITH!</h3>
+                <p class="text-xs text-gray-400">Selecciona tu ubicación exacta para configurar tu cuenta y podio VIP.</p>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="block text-gray-300 font-bold uppercase tracking-wider mb-1">1. Región</label>
+                    <select id="onboard-region-select" onchange="updateOnboardProvincesList(this.value)" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3.5 py-2.5 text-cyber-neonCyan font-bold focus:outline-none focus:border-cyber-neonCyan cursor-pointer">
+                        <option value="Costa">Costa</option>
+                        <option value="Sierra">Sierra</option>
+                        <option value="Oriente">Oriente</option>
+                        <option value="Galápagos">Galápagos</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 font-bold uppercase tracking-wider mb-1">2. Provincia</label>
+                    <select id="onboard-province-select" onchange="updateOnboardCantonsList(document.getElementById('onboard-region-select').value, this.value)" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3.5 py-2.5 text-white font-bold focus:outline-none focus:border-cyber-neonCyan cursor-pointer">
+                        <!-- Dinámico -->
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 font-bold uppercase tracking-wider mb-1">3. Cantón / Ciudad</label>
+                    <select id="onboard-canton-select" onchange="updateOnboardSectorsList(document.getElementById('onboard-region-select').value, document.getElementById('onboard-province-select').value, this.value)" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3.5 py-2.5 text-white font-bold focus:outline-none focus:border-cyber-neonCyan cursor-pointer">
+                        <!-- Dinámico -->
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 font-bold uppercase tracking-wider mb-1">4. Parroquia / Sector / Barrio</label>
+                    <select id="onboard-sector-select" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3.5 py-2.5 text-white font-bold focus:outline-none focus:border-cyber-neonCyan cursor-pointer">
+                        <!-- Dinámico -->
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="saveInitialUserProfile()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyber-neonCyan to-blue-600 text-black font-black text-xs uppercase tracking-wider shadow-neon-cyan hover:opacity-90 transition-all">
+                Guardar y Continuar
+            </button>
+        </div>
+    </div>
+
     <!-- MODAL / SUBPANTALLA: CANJEAR CÓDIGO DE CHEQUE -->
     <div id="check-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-3">
         <div class="bg-cyber-card border border-cyber-border w-full max-w-md rounded-2xl sm:rounded-3xl p-5 space-y-4 relative shadow-2xl max-h-[90vh] overflow-y-auto">
@@ -683,6 +819,15 @@
             <p id="notif-msg" class="text-gray-300 text-[10px] sm:text-xs">Operación realizada correctamente.</p>
         </div>
     </div>
+
+    <!-- Footer Informativo y Legal -->
+    <footer class="bg-cyber-dark border-t border-cyber-border py-8 mt-12 text-center text-xs text-gray-400 space-y-3">
+        <div class="flex justify-center space-x-6">
+            <a href="politica-privacidad.html" class="hover:text-cyber-neonCyan transition-colors">Política de Privacidad</a>
+            <a href="terminos.html" class="hover:text-cyber-neonCyan transition-colors">Términos y Seguridad</a>
+        </div>
+        <p>&copy; 2026 ZenithRecargas Ecuador. Operado con tecnología segura de Firebase y Cloud Firestore.</p>
+    </footer>
 
     <!-- Funciones Auxiliares JS para Abrir/Cerrar Modales -->
     <script>
