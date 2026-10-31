@@ -2,6 +2,14 @@
    ZENITHRECARGAS - TIENDA PRINCIPAL (CSS)
    ========================================== */
 
+/* Prevenir desbordamiento en dispositivos móviles */
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
 /* Fondo ciberpunk de la tienda */
 body {
     background-color: #0a0b10;
@@ -24,8 +32,8 @@ body {
 
 /* Personalización de Scrollbars en modales y chats */
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -64,10 +72,11 @@ body {
     transform: translateY(-2px);
 }
 
-/* Ajustes de tablas en la sección de historial y billetera */
-#walletHistoryTableContainer, #orders-list-container {
+/* Contenedores de tablas con desplazamiento touch horizontal */
+#walletHistoryTableContainer, .overflow-x-auto {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    width: 100%;
 }
 
 /* ==========================================
@@ -75,29 +84,48 @@ body {
    ========================================== */
 @media (max-width: 640px) {
     body {
-        font-size: 14px;
+        font-size: 13px;
     }
 
-    /* Prevenir que tablas desborden la pantalla horizontalmente */
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
+    /* Prevenir que el header tape contenido en pantallas pequeñas */
+    header {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 
-    /* Adaptar botones de pasarelas de pago y filtros */
-    .grid-cols-5 {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-
-    /* Ajustes para modales en móviles */
+    /* Modales adaptados al tamaño de pantalla móvil con scroll táctil */
     #checkout-modal > div,
     #deposit-modal > div,
     #withdraw-modal > div,
     #receipt-modal > div,
-    #country-restriction-overlay > div {
-        width: 92% !important;
-        max-height: 90vh;
-        overflow-y: auto;
+    #check-modal > div,
+    #location-modal > div,
+    #onboarding-modal > div,
+    #sub-checkout-modal > div,
+    #order-status-overlay > div {
+        width: 95% !important;
+        max-height: 88vh !important;
+        margin: auto;
+        padding: 1.25rem !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Prevenir que las tablas desborden la pantalla horizontalmente */
+    table {
+        font-size: 11px;
+    }
+
+    /* Ajuste de entradas e inputs en Android */
+    input, select, button {
+        font-size: 14px !important; /* Previene el zoom automático de Chrome en Android al enfocar inputs */
+    }
+
+    /* Ajuste de notificaciones flotantes en móviles */
+    #notification-box {
+        left: 0.75rem !important;
+        right: 0.75rem !important;
+        bottom: 0.75rem !important;
+        max-width: 100% !important;
     }
 }

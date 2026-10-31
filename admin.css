@@ -2,6 +2,14 @@
    ZENITHRECARGAS - PANEL DE ADMINISTRACIÓN (CSS)
    ========================================== */
 
+/* Prevenir desbordamiento horizontal en móviles Android */
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
 /* Fondo cibernético con rejilla */
 .cyber-grid {
     background-color: #0a0b10;
@@ -14,8 +22,8 @@
 
 /* Personalización de la barra de desplazamiento */
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -49,26 +57,42 @@
 #admin-orders-container, 
 #admin-prices-list, 
 #admin-users-list, 
-#admin-chat-messages {
+#admin-chat-messages,
+.overflow-x-auto {
+    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    width: 100%;
 }
 
-/* Optimización para pantallas pequeñas de celulares Android */
+/* ==========================================
+   OPTIMIZACIÓN PARA CELULARES ANDROID
+   ========================================== */
 @media (max-width: 640px) {
     body {
         font-size: 13px;
     }
 
+    /* Prevenir zoom automático de Chrome en Android al tocar inputs */
     input, select, textarea, button {
+        font-size: 14px !important;
         max-width: 100%;
     }
 
-    /* Modales centrados y ajustados en móviles */
+    /* Modales centrados y adaptados en móviles con scroll interno */
     #addProductModal > div, 
     #ocrPreviewModal > div,
-    #admin-login-overlay > div {
+    #admin-login-overlay > div,
+    div[id*="modal"] > div {
         width: 95% !important;
-        padding: 1.25rem !important;
+        max-height: 88vh !important;
         margin: auto;
+        padding: 1.25rem !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Ajustar tarjetas de estadísticas del admin en columna o grid compacto */
+    .grid-cols-4, .grid-cols-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     }
 }

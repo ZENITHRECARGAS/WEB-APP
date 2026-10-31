@@ -45,9 +45,83 @@
 </head>
 <body class="min-h-screen cyber-grid flex flex-col justify-between selection:bg-cyan-500 selection:text-black overflow-x-hidden">
 
+    <!-- OVERLAY DE CARGA INICIAL (SINCRONIZACIÓN REAL DE UBICACIÓN Y CUENTA) -->
+    <div id="initial-loader" class="fixed inset-0 z-[100] bg-cyber-dark flex flex-col items-center justify-center p-4 transition-opacity duration-500">
+        <div class="relative flex items-center justify-center mb-6">
+            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-cyber-border border-t-cyber-neonCyan border-r-cyber-neonPink animate-spin"></div>
+            <div class="absolute w-14 h-14 rounded-2xl bg-cyber-card border border-cyber-border flex items-center justify-center shadow-neon-cyan">
+                <i class="fa-solid fa-location-crosshairs text-cyber-neonCyan text-2xl animate-pulse"></i>
+            </div>
+        </div>
+
+        <div class="text-center space-y-2 max-w-xs sm:max-w-sm">
+            <h3 class="font-orbitron font-black text-white text-base sm:text-lg tracking-wider">ZENITH<span class="text-cyber-neonCyan">RECARGAS</span></h3>
+            <p id="loader-status-text" class="text-xs text-cyber-neonCyan font-mono font-medium animate-pulse">Iniciando sistema y conectando base de datos...</p>
+            
+            <div class="w-full bg-cyber-card border border-cyber-border h-2 rounded-full overflow-hidden mt-3">
+                <div id="loader-progress-bar" class="bg-gradient-to-r from-cyber-neonCyan via-cyber-neonPurple to-cyber-neonPink h-full w-0 transition-all duration-300"></div>
+            </div>
+            <span id="loader-percentage" class="text-[10px] text-gray-400 font-mono">0%</span>
+        </div>
+    </div>
+
+    <!-- OVERLAY DE PENDIENTE / PROCESANDO COMPRA EN TIEMPO REAL -->
+    <div id="order-status-overlay" class="fixed inset-0 z-[200] bg-cyber-dark/95 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="bg-cyber-card border-2 border-cyber-neonCyan w-full max-w-md rounded-3xl p-6 sm:p-8 space-y-6 text-center shadow-neon-cyan relative overflow-hidden">
+            
+            <!-- BOTÓN "X" PARA CERRAR LA PANTALLA MANUALMENTE -->
+            <button onclick="closeOrderStatusOverlay()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-cyber-dark border border-cyber-border text-gray-400 hover:text-white flex items-center justify-center transition-all z-10 shadow-md">
+                <i class="fa-solid fa-xmark text-base"></i>
+            </button>
+
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-cyber-neonCyan/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- Estado 1: Cargando / Procesando (Spinner) -->
+            <div id="order-status-loading" class="space-y-6">
+                <div class="relative flex items-center justify-center">
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-4 border-cyber-border border-t-cyber-neonCyan border-r-cyber-neonPink animate-spin"></div>
+                    <div class="absolute w-12 h-12 rounded-2xl bg-cyber-dark border border-cyber-border flex items-center justify-center shadow-neon-cyan">
+                        <i class="fa-solid fa-hourglass-half text-cyber-neonCyan text-xl animate-pulse"></i>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="font-orbitron font-black text-white text-lg sm:text-xl tracking-wider">PROCESANDO <span class="text-cyber-neonCyan">TU COMPRA</span></h3>
+                    <p class="text-xs text-gray-300">Tu pedido se ha recibido correctamente. Estamos verificando tu pago en tiempo real...</p>
+                    <div class="pt-2">
+                        <span class="inline-block px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold uppercase animate-pulse">
+                            <i class="fa-solid fa-clock mr-1"></i> Estado: Pendiente de Confirmación
+                        </span>
+                    </div>
+                </div>
+
+                <p class="text-[10px] text-gray-400 font-mono">Puedes navegar o volver más tarde; el estado se actualizará automáticamente al ser verificado.</p>
+            </div>
+
+            <!-- Estado 2: Verificado / Enviado Exitosamente -->
+            <div id="order-status-completed" class="hidden space-y-6">
+                <div class="w-20 h-20 mx-auto rounded-full bg-green-500/20 border-2 border-cyber-neonGreen flex items-center justify-center shadow-[0_0_20px_rgba(0,255,102,0.4)]">
+                    <i class="fa-solid fa-circle-check text-cyber-neonGreen text-3xl"></i>
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="font-orbitron font-black text-white text-xl tracking-wider">¡PEDIDO <span class="text-cyber-neonGreen">APROBADO!</span></h3>
+                    <div class="bg-cyber-dark border border-cyber-border p-4 rounded-2xl space-y-2 text-left">
+                        <span class="text-[10px] text-cyber-neonCyan uppercase font-bold tracking-widest block font-orbitron">Detalle / Motivo de Entrega:</span>
+                        <p id="order-completed-reason" class="text-xs text-gray-200 font-medium leading-relaxed">Tu recarga ha sido acreditada exitosamente a tu cuenta de juego.</p>
+                    </div>
+                </div>
+
+                <button onclick="closeOrderStatusOverlay()" class="w-full py-3.5 rounded-xl bg-cyber-neonGreen text-black font-bold text-xs uppercase tracking-wider shadow-neon-green hover:opacity-90 transition-all">
+                    Entendido / Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Top Notification Banner -->
     <div class="bg-gradient-to-r from-purple-900 via-indigo-900 to-cyan-900 text-[10px] sm:text-xs py-1.5 px-3 text-center font-medium border-b border-cyber-border text-cyan-300 leading-tight">
-        <i class="fa-solid fa-bolt text-cyber-neonCyan mr-1"></i> ¡Atención Gamers! Recargas 100% seguras y automatizadas. Soporte activo 24/7[cite: 5, 6].
+        <i class="fa-solid fa-bolt text-cyber-neonCyan mr-1"></i> ¡Atención Gamers! Recargas 100% seguras y automatizadas. Soporte activo 24/7.
     </div>
 
     <!-- Navigation Header -->
@@ -63,18 +137,35 @@
             </div>
 
             <!-- Desktop Nav Menu -->
-            <nav class="hidden md:flex items-center space-x-8 font-medium text-sm">
-                <button onclick="switchTab('catalog')" id="nav-btn-catalog" class="text-cyber-neonCyan border-b-2 border-cyber-neonCyan pb-1 transition-all"><i class="fa-solid fa-store mr-2"></i>Catálogo</button>
-                <button onclick="switchTab('wallet')" id="nav-btn-wallet" class="text-gray-400 hover:text-white pb-1 transition-all"><i class="fa-solid fa-wallet mr-2"></i>Billetera / Saldo</button>
-                <button onclick="switchTab('history')" id="nav-btn-history" class="text-gray-400 hover:text-white pb-1 transition-all"><i class="fa-solid fa-clock-rotate-left mr-2"></i>Mis Órdenes</button>
-                <button onclick="switchTab('support')" id="nav-btn-support" class="text-gray-400 hover:text-white pb-1 transition-all"><i class="fa-solid fa-headset mr-2"></i>Ayuda / Soporte</button>
-                <button onclick="switchTab('subscriptions')" id="nav-btn-subscriptions" class="text-gray-400 hover:text-white pb-1 transition-all"><i class="fa-solid fa-tv mr-2"></i>Suscripciones</button>
+            <nav class="hidden md:flex items-center space-x-6 font-medium text-sm">
+                <button onclick="switchTab('catalog')" id="nav-btn-catalog" class="group relative flex items-center justify-center p-2 text-cyber-neonCyan transition-all" title="Catálogo">
+                    <i class="fa-solid fa-store text-xl"></i>
+                    <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyber-neonCyan text-cyber-neonCyan text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none shadow-neon-cyan z-50">Catálogo</span>
+                </button>
+
+                <button onclick="switchTab('wallet')" id="nav-btn-wallet" class="group relative flex items-center justify-center p-2 text-gray-400 hover:text-white transition-all" title="Billetera / Saldo">
+                    <i class="fa-solid fa-wallet text-xl"></i>
+                    <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyber-border text-white text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none shadow-xl z-50">Billetera / Saldo</span>
+                </button>
+
+                <button onclick="switchTab('history')" id="nav-btn-history" class="group relative flex items-center justify-center p-2 text-gray-400 hover:text-white transition-all" title="Mis Órdenes">
+                    <i class="fa-solid fa-clock-rotate-left text-xl"></i>
+                    <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyber-border text-white text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200 pointer-events-none shadow-xl z-50">Mis Órdenes</span>
+                </button>
+
+                <button onclick="switchTab('support')" id="nav-btn-support" class="group relative flex items-center justify-center p-2 text-gray-400 hover:text-white transition-all" title="Ayuda / Soporte">
+                    <i class="fa-solid fa-headset text-xl"></i>
+                    <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyber-border text-white text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none shadow-xl z-50">Ayuda / Soporte</span>
+                </button>
+
+                <button onclick="switchTab('subscriptions')" id="nav-btn-subscriptions" class="group relative flex items-center justify-center p-2 text-gray-400 hover:text-white transition-all" title="Suscripciones">
+                    <i class="fa-solid fa-tv text-xl"></i>
+                    <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyber-border text-white text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none shadow-xl z-50">Suscripciones</span>
+                </button>
             </nav>
 
             <!-- User Auth Profile, Location & Notifications Tray -->
             <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
-                
-                <!-- BOTÓN INDICADOR DE UBICACIÓN EN VIVO (ABRE MODAL DE FILTRADO EN CASCADA) -->
                 <button onclick="openLocationModal()" class="flex items-center space-x-2 bg-cyber-dark/80 border border-cyber-border px-3 py-1.5 rounded-xl text-xs shadow-md hover:border-cyber-neonCyan transition-all group">
                     <i class="fa-solid fa-location-dot text-cyber-neonPink animate-pulse text-xs group-hover:scale-110 transition-transform"></i>
                     <div class="flex flex-col text-left">
@@ -149,13 +240,13 @@
                 <div class="absolute -left-10 -top-10 w-48 h-48 sm:w-96 sm:h-96 bg-cyber-neonPurple/10 rounded-full blur-3xl pointer-events-none"></div>
                 
                 <div class="relative z-10 max-w-2xl space-y-2 sm:space-y-4">
-                    <span class="inline-block px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyber-neonCyan text-cyber-neonCyan text-[10px] sm:text-xs font-semibold tracking-wider uppercase">Plataforma Oficial #1</span>
-                    <h2 class="font-orbitron font-black text-xl sm:text-4xl text-white tracking-tight leading-tight break-words">RECARGAS INSTANTÁNEAS <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-neonCyan to-cyber-neonPurple block sm:inline">POR ID DE JUGADOR</span>[cite: 5, 6]</h2>
+                    <span class="inline-block px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyber-neonCyan text-cyber-neonCyan text-[10px] sm:text-xs font-semibold tracking-wider uppercase">Plataforma Oficial</span>
+                    <h2 class="font-orbitron font-black text-xl sm:text-4xl text-white tracking-tight leading-tight break-words">RECARGAS INSTANTÁNEAS <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-neonCyan to-cyber-neonPurple block sm:inline">POR ID DE JUGADOR</span></h2>
                     <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">Diamantes, pases y recargas con verificación automática conectada a tu base de datos de Firestore.</p>
                 </div>
             </div>
 
-            <!-- MÓDULO TOP RECARGADORES VIP FILTRADO POR UBICACIÓN EN VIVO CON INSIGNIA DE VERIFICACIÓN -->
+            <!-- MÓDULO TOP RECARGADORES VIP -->
             <div class="bg-cyber-card border border-cyber-border p-4 sm:p-6 rounded-2xl sm:rounded-3xl space-y-4 shadow-2xl relative overflow-hidden">
                 <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-cyber-neonPink/10 rounded-full blur-3xl pointer-events-none"></div>
                 
@@ -179,7 +270,9 @@
 
                 <!-- Lista del Ranking Dinámico -->
                 <div id="top-recargadores-container" class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                    <div class="col-span-full p-4 text-center text-gray-500 text-xs">Cargando ranking del sector...</div>
+                    <div class="col-span-full p-4 text-center text-cyber-neonCyan text-xs font-mono bg-cyber-dark/40 rounded-xl border border-cyber-border">
+                        <i class="fa-solid fa-spinner fa-spin mr-2"></i> Sincronizando con Firestore para el sector <span class="text-white font-bold" id="fallback-sector-txt">Sabanilla</span>...
+                    </div>
                 </div>
             </div>
 
@@ -385,7 +478,7 @@
 
     </main>
 
-    <!-- BANNER DE COOKIES PROFESIONAL (ANDROID & DESKTOP) -->
+    <!-- BANNER DE COOKIES PROFESIONAL -->
     <div id="cookie-banner" class="hidden fixed bottom-3 left-3 right-3 sm:left-6 sm:bottom-6 z-50 bg-cyber-card border border-cyber-neonCyan p-4 rounded-2xl shadow-2xl space-y-3 max-w-lg mx-auto backdrop-blur-md">
         <div class="flex items-start space-x-3">
             <div class="w-9 h-9 rounded-xl bg-cyan-500/20 text-cyber-neonCyan flex items-center justify-center flex-shrink-0 text-base">
@@ -406,7 +499,7 @@
         </div>
     </div>
 
-    <!-- PANTALLA DE APAGADO / MANTENIMIENTO GLOBAL (CONTROLADO DESDE FIRESTORE) -->
+    <!-- PANTALLA DE MANTENIMIENTO GLOBAL -->
     <div id="maintenance-screen" class="hidden fixed inset-0 z-[999] bg-cyber-dark flex items-center justify-center p-6 text-center">
         <div class="max-w-md w-full bg-cyber-card border-2 border-red-500 rounded-3xl p-8 space-y-6 shadow-[0_0_30px_rgba(255,0,0,0.3)] animate-pulse">
             <div class="w-16 h-16 mx-auto rounded-2xl bg-red-500/20 text-red-500 flex items-center justify-center text-3xl shadow-lg">
@@ -424,7 +517,7 @@
         </div>
     </div>
 
-    <!-- MODAL DE CAMBIO DE UBICACIÓN VIP EN CASCADA (HEADER) -->
+    <!-- MODAL DE CAMBIO DE UBICACIÓN VIP EN CASCADA -->
     <div id="location-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden p-3">
         <div class="bg-cyber-card border-2 border-cyber-neonCyan w-full max-w-md rounded-3xl p-5 space-y-4 relative shadow-neon-cyan max-h-[95vh] overflow-y-auto">
             <div class="flex items-center justify-between border-b border-cyber-border pb-2">
@@ -451,21 +544,18 @@
                 <div>
                     <label class="block text-gray-300 font-bold uppercase tracking-wider mb-1">2. Provincia</label>
                     <select id="header-province-select" onchange="updateHeaderCantonsList(document.getElementById('header-region-select').value, this.value)" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2 text-white font-bold focus:outline-none focus:border-cyber-neonCyan cursor-pointer">
-                        <!-- Dinámico -->
                     </select>
                 </div>
 
                 <div>
                     <label class="block text-gray-300 font-bold uppercase tracking-wider mb-1">3. Cantón / Ciudad</label>
                     <select id="header-canton-select" onchange="updateHeaderSectorsList(document.getElementById('header-region-select').value, document.getElementById('header-province-select').value, this.value)" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2 text-white font-bold focus:outline-none focus:border-cyber-neonCyan cursor-pointer">
-                        <!-- Dinámico -->
                     </select>
                 </div>
 
                 <div>
                     <label class="block text-gray-300 font-bold uppercase tracking-wider mb-1">4. Parroquia / Sector</label>
                     <select id="header-sector-select" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2 text-white font-bold focus:outline-none focus:border-cyber-neonCyan cursor-pointer">
-                        <!-- Dinámico -->
                     </select>
                 </div>
             </div>
@@ -476,7 +566,7 @@
         </div>
     </div>
 
-    <!-- MODAL DE BIENVENIDA Y REGISTRO COMPLETO EN CASCADA -->
+    <!-- MODAL DE BIENVENIDA Y REGISTRO COMPLETO -->
     <div id="onboarding-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden p-3">
         <div class="bg-cyber-card border-2 border-cyber-neonCyan w-full max-w-md rounded-3xl p-6 space-y-4 relative shadow-neon-cyan max-h-[95vh] overflow-y-auto">
             <div class="text-center space-y-1">
@@ -501,21 +591,18 @@
                 <div>
                     <label class="block text-gray-300 font-bold uppercase tracking-wider mb-1">2. Provincia</label>
                     <select id="onboard-province-select" onchange="updateOnboardCantonsList(document.getElementById('onboard-region-select').value, this.value)" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3.5 py-2.5 text-white font-bold focus:outline-none focus:border-cyber-neonCyan cursor-pointer">
-                        <!-- Dinámico -->
                     </select>
                 </div>
 
                 <div>
                     <label class="block text-gray-300 font-bold uppercase tracking-wider mb-1">3. Cantón / Ciudad</label>
                     <select id="onboard-canton-select" onchange="updateOnboardSectorsList(document.getElementById('onboard-region-select').value, document.getElementById('onboard-province-select').value, this.value)" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3.5 py-2.5 text-white font-bold focus:outline-none focus:border-cyber-neonCyan cursor-pointer">
-                        <!-- Dinámico -->
                     </select>
                 </div>
 
                 <div>
                     <label class="block text-gray-300 font-bold uppercase tracking-wider mb-1">4. Parroquia / Sector / Barrio</label>
                     <select id="onboard-sector-select" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3.5 py-2.5 text-white font-bold focus:outline-none focus:border-cyber-neonCyan cursor-pointer">
-                        <!-- Dinámico -->
                     </select>
                 </div>
             </div>
@@ -526,7 +613,7 @@
         </div>
     </div>
 
-    <!-- MODAL / SUBPANTALLA: CANJEAR CÓDIGO DE CHEQUE -->
+    <!-- MODAL: CANJEAR CHEQUE -->
     <div id="check-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-3">
         <div class="bg-cyber-card border border-cyber-border w-full max-w-md rounded-2xl sm:rounded-3xl p-5 space-y-4 relative shadow-2xl max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between border-b border-cyber-border pb-2">
@@ -777,7 +864,7 @@
                     </div>
                 </div>
 
-                <div id="payment-chat-container" class="p-3 rounded-xl bg-cyber-dark border border-cyber-border space-y-1.5">
+                <div id="payment-chat-container" class="p-3 rounded-xl bg-cyber-dark border border-cyber-border space-y-2">
                     <div class="flex items-center space-x-1.5 text-cyber-neonCyan text-xs font-bold">
                         <i class="fa-solid fa-headset"></i>
                         <span id="payment-title-info">Atención Directa por Chat Interno</span>
@@ -785,6 +872,16 @@
                     <p id="payment-desc-info" class="text-[10px] text-gray-300 leading-relaxed">
                         Realiza tu pago y adjunta tu comprobante bancario directamente en nuestra sección de soporte.
                     </p>
+
+                    <!-- Formulario Integrado del Botón de PayPal -->
+                    <div id="paypal-button-container" class="hidden pt-2 flex flex-col items-center justify-center">
+                        <style>.pp-B84UJ4QBDB2MJ{text-align:center;border:none;border-radius:0.5rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;transition:all 0.2s;}.pp-B84UJ4QBDB2MJ:hover{background-color:#f2c32e;}</style>
+                        <form action="https://www.paypal.com/ncp/payment/B84UJ4QBDB2MJ" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+                            <input class="pp-B84UJ4QBDB2MJ" type="submit" value="Comprar ahora" />
+                            <img src="https://www.paypalobjects.com/images/Debit_Credit.svg" alt="cards" />
+                            <section style="font-size: 0.75rem; color: #9ca3af;"> Con la tecnología de <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -825,34 +922,10 @@
         <div class="flex justify-center space-x-6">
             <a href="politica-privacidad.html" class="hover:text-cyber-neonCyan transition-colors">Política de Privacidad</a>
             <a href="terminos.html" class="hover:text-cyber-neonCyan transition-colors">Términos y Seguridad</a>
+            <a href="faq" class="hover:text-cyber-neonCyan transition-colors">Faq</a>
         </div>
         <p>&copy; 2026 ZenithRecargas Ecuador. Operado con tecnología segura de Firebase y Cloud Firestore.</p>
     </footer>
-
-    <!-- Funciones Auxiliares JS para Abrir/Cerrar Modales -->
-    <script>
-        function openDepositModal() {
-            document.getElementById('deposit-modal').classList.remove('hidden');
-        }
-        function closeDepositModal() {
-            document.getElementById('deposit-modal').classList.add('hidden');
-        }
-        function openWithdrawModal() {
-            document.getElementById('withdraw-modal').classList.remove('hidden');
-        }
-        function closeWithdrawModal() {
-            document.getElementById('withdraw-modal').classList.add('hidden');
-        }
-        function closeReceiptModal() {
-            document.getElementById('receipt-modal').classList.add('hidden');
-        }
-        function openCheckModal() {
-            document.getElementById('check-modal').classList.remove('hidden');
-        }
-        function closeCheckModal() {
-            document.getElementById('check-modal').classList.add('hidden');
-        }
-    </script>
 
     <!-- MODAL: COMPRAR SUSCRIPCIÓN -->
     <div id="sub-checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-3">
