@@ -395,7 +395,7 @@
                 <div class="bg-cyber-card p-6 sm:p-8 rounded-3xl border border-cyber-border space-y-6">
                     <div class="border-b border-cyber-border pb-4">
                         <h2 class="font-orbitron font-bold text-xl text-white">Registrar ID de Jugador Autorizado</h2>
-                        <p class="text-xs text-gray-400">Agrega el ID del juego, apodo, nivel, avatar y fecha de creación para calcular la antigüedad únicamente en años.</p>
+                        <p class="text-xs text-gray-400">Agrega el ID del juego, apodo, nivel, avatar y año de creación para calcular la antigüedad únicamente en años.</p>
                     </div>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
@@ -419,8 +419,9 @@
                             <input type="text" id="admin-reg-avatar" placeholder="https://res.cloudinary.com/.../imagen.jpg" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-cyber-neonCyan font-mono">
                         </div>
                         <div class="space-y-1">
-                            <label class="block font-semibold text-amber-400">Fecha de Creación de la Cuenta</label>
+                            <label class="block font-semibold text-amber-400">Año de Creación de la Cuenta</label>
                             <input type="number" id="admin-reg-created-at" min="2015" max="2030" placeholder="Ej. 2024" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-amber-400 font-mono">
+                        </div>
                     </div>
 
                     <div class="flex justify-end pt-2">
@@ -698,9 +699,13 @@
     <!-- SCRIPT DE CAMBIO DE PESTAÑAS -->
     <script>
         function switchAdminTab(tabName) {
-            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.admin-tab-content').forEach(el => {
+                el.classList.add('hidden');
+            });
             const selectedContent = document.getElementById(`tab-content-${tabName}`);
-            if (selectedContent) selectedContent.classList.remove('hidden');
+            if (selectedContent) {
+                selectedContent.classList.remove('hidden');
+            }
         }
     </script>
 
