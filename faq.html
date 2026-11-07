@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es" class="dark overflow-x-hidden">
+<head>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00f0ff">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Preguntas Frecuentes | ZenithRecargas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            dark: '#0a0b10',
+                            card: '#121420',
+                            border: '#2a2f4c',
+                            neonCyan: '#00f0ff',
+                            neonPurple: '#b000ff',
+                            neonPink: '#ff007f',
+                            neonGreen: '#00ff66'
+                        }
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 12px rgba(0, 240, 255, 0.35)',
+                        'neon-purple': '0 0 12px rgba(176, 0, 255, 0.35)',
+                        'neon-pink': '0 0 12px rgba(255, 0, 127, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Orbitron -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <!-- Custom CSS File -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen cyber-grid flex flex-col justify-between selection:bg-cyan-500 selection:text-black overflow-x-hidden text-gray-200">
+
+    <!-- Top Notification Banner -->
+    <div class="bg-gradient-to-r from-purple-900 via-indigo-900 to-cyan-900 text-[10px] sm:text-xs py-1.5 px-3 text-center font-medium border-b border-cyber-border text-cyan-300 leading-tight">
+        <i class="fa-solid fa-bolt text-cyber-neonCyan mr-1"></i> Centro de Ayuda y Reseller FAQ - Centro Oficial ZenithRecargas.
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-cyber-dark/90 border-b border-cyber-border">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
+            <!-- Logo con imagen -->
+            <a href="index.html" class="flex items-center space-x-3 cursor-pointer min-w-0">
+                <img src="logo.png" alt="ZenithRecargas Logo" class="h-10 sm:h-12 w-auto object-contain rounded-xl shadow-neon-cyan">
+                <div class="truncate">
+                    <h1 class="font-orbitron font-black text-xs sm:text-xl tracking-wider text-white leading-none">ZENITH<span class="text-cyber-neonCyan glow-text-cyan">RECARGAS</span></h1>
+                    <p class="text-[8px] sm:text-[10px] text-gray-400 tracking-widest uppercase hidden sm:block">Gaming Store Ecuador</p>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Menu (ÍCONOS CON TOOLTIP FLOTANTE) -->
+            <nav class="hidden md:flex items-center space-x-6 font-medium text-sm">
+                <a href="index.html#catalog" class="group relative flex items-center justify-center p-2 text-gray-400 hover:text-white transition-all" title="Catálogo">
+                    <i class="fa-solid fa-store text-xl"></i>
+                    <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyber-border text-white text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none shadow-xl z-50">Catálogo</span>
+                </a>
+
+                <a href="index.html#wallet" class="group relative flex items-center justify-center p-2 text-gray-400 hover:text-white transition-all" title="Billetera / Saldo">
+                    <i class="fa-solid fa-wallet text-xl"></i>
+                    <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyber-border text-white text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none shadow-xl z-50">Billetera / Saldo</span>
+                </a>
+
+                <a href="index.html#history" class="group relative flex items-center justify-center p-2 text-gray-400 hover:text-white transition-all" title="Mis Órdenes">
+                    <i class="fa-solid fa-clock-rotate-left text-xl"></i>
+                    <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyber-border text-white text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none shadow-xl z-50">Mis Órdenes</span>
+                </a>
+
+                <a href="index.html#support" class="group relative flex items-center justify-center p-2 text-gray-400 hover:text-white transition-all" title="Ayuda / Soporte">
+                    <i class="fa-solid fa-headset text-xl"></i>
+                    <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyber-border text-white text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none shadow-xl z-50">Ayuda / Soporte</span>
+                </a>
+
+                <a href="faq.html" class="group relative flex items-center justify-center p-2 text-cyber-neonCyan border-b-2 border-cyber-neonCyan transition-all" title="Preguntas Frecuentes">
+                    <i class="fa-solid fa-circle-question text-xl"></i>
+                    <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyber-neonCyan text-cyber-neonCyan text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none shadow-neon-cyan z-50">Preguntas Frecuentes</span>
+                </a>
+            </nav>
+
+            <a href="index.html" class="px-3.5 py-2 rounded-xl bg-cyber-card border border-cyber-border hover:border-cyber-neonCyan text-white text-xs font-bold transition-all flex items-center space-x-2">
+                <i class="fa-solid fa-arrow-left text-cyber-neonCyan"></i>
+                <span class="hidden sm:inline">Volver a la Tienda</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Content Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 py-8 space-y-8">
+        
+        <!-- Header Banner -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyber-neonCyan text-cyber-neonCyan text-xs font-bold uppercase tracking-widest">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Centro de Respuestas</span>
+            </div>
+            <h2 class="font-orbitron font-black text-2xl sm:text-4xl text-white tracking-wide">PREGUNTAS <span class="text-cyber-neonCyan">FRECUENTES</span></h2>
+            <p class="text-xs sm:text-sm text-gray-400 max-w-lg mx-auto">Resuelve todas tus dudas sobre métodos de recarga por ID, tiempos de entrega, recargas de saldo y seguridad en Ecuador.</p>
+        </div>
+
+        <!-- FAQ Categories / Items -->
+        <div class="space-y-4">
+
+            <!-- Item 1 -->
+            <details class="group bg-cyber-card border border-cyber-border rounded-2xl p-4 sm:p-5 transition-all [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center justify-between cursor-pointer text-white font-bold text-sm sm:text-base">
+                    <span class="flex items-center space-x-3">
+                        <i class="fa-solid fa-clock text-cyber-neonCyan"></i>
+                        <span>¿Cuánto tiempo tarda en llegar mi recarga de diamantes?</span>
+                    </span>
+                    <span class="ml-2 transition-transform duration-300 group-open:-rotate-180 text-cyber-neonCyan">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                </summary>
+                <div class="mt-4 pt-3 border-t border-cyber-border/60 text-xs sm:text-sm text-gray-300 leading-relaxed space-y-2">
+                    <p>Las recargas directas por ID de jugador (como Free Fire o Mobile Legends) se procesan de forma **automatizada**. Normalmente se acreditan en tu cuenta entre <strong>1 a 10 minutos</strong> después de que se verifica la transacción.</p>
+                    <p>Si pagas directamente con tu <strong>Saldo Billetera</strong>, el proceso inicia de forma instantánea.</p>
+                </div>
+            </details>
+
+            <!-- Item 2 -->
+            <details class="group bg-cyber-card border border-cyber-border rounded-2xl p-4 sm:p-5 transition-all [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center justify-between cursor-pointer text-white font-bold text-sm sm:text-base">
+                    <span class="flex items-center space-x-3">
+                        <i class="fa-solid fa-wallet text-cyber-neonGreen"></i>
+                        <span>¿Cómo funciona la Billetera y el Carga de Saldo?</span>
+                    </span>
+                    <span class="ml-2 transition-transform duration-300 group-open:-rotate-180 text-cyber-neonCyan">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                </summary>
+                <div class="mt-4 pt-3 border-t border-cyber-border/60 text-xs sm:text-sm text-gray-300 leading-relaxed space-y-2">
+                    <p>Tu Billetera Virtual te permite tener dinero disponible dentro de la plataforma para hacer compras con un solo clic sin tener que enviar comprobantes cada vez.</p>
+                    <ul class="list-disc list-inside space-y-1 text-gray-400 pl-2">
+                        <li><strong>Agregar Saldo:</strong> Transfiere a nuestra cuenta oficial de Banco Guayaquil y sube la foto de tu comprobante.</li>
+                        <li><strong>Canje por Cheque:</strong> Si tienes un código de cheque otorgado por la administración, puedes canjearlo ingresando el número y la hora.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- Item 3 -->
+            <details class="group bg-cyber-card border border-cyber-border rounded-2xl p-4 sm:p-5 transition-all [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center justify-between cursor-pointer text-white font-bold text-sm sm:text-base">
+                    <span class="flex items-center space-x-3">
+                        <i class="fa-solid fa-shield-halved text-cyber-neonPink"></i>
+                        <span>¿Es seguro ingresar mi ID de jugador? ¿Piden contraseña?</span>
+                    </span>
+                    <span class="ml-2 transition-transform duration-300 group-open:-rotate-180 text-cyber-neonCyan">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                </summary>
+                <div class="mt-4 pt-3 border-t border-cyber-border/60 text-xs sm:text-sm text-gray-300 leading-relaxed">
+                    <p><strong>NUNCA pedimos tu contraseña ni acceso a tu cuenta de Facebook o Google.</strong> Para recargas de juegos como Free Fire, Roblox o PUBG Mobile solo solicitamos tu ID numérico público (o correo electrónico para tarjetas de regalo). Es 100% seguro y garantizado.</p>
+                </div>
+            </details>
+
+            <!-- Item 4 -->
+            <details class="group bg-cyber-card border border-cyber-border rounded-2xl p-4 sm:p-5 transition-all [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center justify-between cursor-pointer text-white font-bold text-sm sm:text-base">
+                    <span class="flex items-center space-x-3">
+                        <i class="fa-solid fa-trophy text-amber-400"></i>
+                        <span>¿Cómo aparezco en el Podio / Ranking VIP de mi sector?</span>
+                    </span>
+                    <span class="ml-2 transition-transform duration-300 group-open:-rotate-180 text-cyber-neonCyan">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                </summary>
+                <div class="mt-4 pt-3 border-t border-cyber-border/60 text-xs sm:text-sm text-gray-300 leading-relaxed space-y-2">
+                    <p>El podio de <strong>Top Recargadores VIP</strong> resalta automáticamente a los compradores con mayor volumen de recargas acumuladas en su parroquia o cantón seleccionado (por ejemplo, Sabanilla, Pedro Carbo, Guayaquil, etc.).</p>
+                    <p>Los líderes del podio reciben insignias especiales VIP Diamante, Oro y Plata con beneficios exclusivos.</p>
+                </div>
+            </details>
+
+            <!-- Item 5 -->
+            <details class="group bg-cyber-card border border-cyber-border rounded-2xl p-4 sm:p-5 transition-all [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center justify-between cursor-pointer text-white font-bold text-sm sm:text-base">
+                    <span class="flex items-center space-x-3">
+                        <i class="fa-solid fa-building-columns text-cyan-400"></i>
+                        <span>¿Qué métodos de pago aceptan en Ecuador?</span>
+                    </span>
+                    <span class="ml-2 transition-transform duration-300 group-open:-rotate-180 text-cyber-neonCyan">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                </summary>
+                <div class="mt-4 pt-3 border-t border-cyber-border/60 text-xs sm:text-sm text-gray-300 leading-relaxed space-y-1">
+                    <p>Aceptamos los principales medios locales e internacionales:</p>
+                    <ul class="list-disc list-inside text-gray-400 space-y-1 pt-1">
+                        <li><strong>Banco Guayaquil:</strong> Transferencia o depósito directo.</li>
+                        <li><strong>Saldo Billetera Virtual:</strong> Acreditación inmediata.</li>
+                        <li><strong>PayPal:</strong> Para pagos internacionales o tarjetas registradas.</li>
+                        <li><strong>Atención directa por WhatsApp:</strong> Asistencia personalizada en tiempo real.</li>
+                    </ul>
+                </div>
+            </details>
+
+        </div>
+
+        <!-- Support Callout Box -->
+        <div class="p-6 rounded-3xl bg-gradient-to-r from-cyber-card via-indigo-950 to-cyber-card border border-cyber-neonCyan text-center space-y-3 shadow-neon-cyan">
+            <h3 class="font-orbitron font-bold text-white text-base sm:text-lg">¿Tienes alguna pregunta no resuelta?</h3>
+            <p class="text-xs text-gray-300">Nuestro equipo de soporte activo está listo para ayudarte las 24 horas a través de nuestro chat interno.</p>
+            <a href="index.html#support" class="inline-block px-5 py-2.5 rounded-xl bg-cyber-neonCyan text-black font-bold text-xs uppercase tracking-wider shadow-lg hover:opacity-90 transition-all">
+                Ir al Chat de Soporte
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-cyber-dark border-t border-cyber-border py-8 text-center text-xs text-gray-400 space-y-3">
+        <div class="flex justify-center space-x-6">
+            <a href="politica-privacidad.html" class="hover:text-cyber-neonCyan transition-colors">Política de Privacidad</a>
+            <a href="terminos.html" class="hover:text-cyber-neonCyan transition-colors">Términos y Seguridad</a>
+        </div>
+        <p>&copy; 2026 ZenithRecargas Ecuador. Operado con tecnología segura de Firebase y Cloud Firestore.</p>
+    </footer>
+
+</body>
+</html>

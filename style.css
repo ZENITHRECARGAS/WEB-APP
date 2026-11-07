@@ -129,3 +129,56 @@ body {
         max-width: 100% !important;
     }
 }
+/* ==========================================
+   TEMA NAVIDEÑO - ZENITH RECARGAS
+   ========================================== */
+
+/* Fondo general de la plataforma con atmósfera invernal/navideña */
+body {
+    background-color: #0a1118 !important;
+    background-image: radial-gradient(circle at 50% 10%, #162a36 0%, #0a1118 70%) !important;
+    color: #f3f4f6;
+}
+
+/* Tarjetas con bordes sutiles en tono rojo y verde navideño */
+.bg-cyber-card {
+    background-color: #111c24 !important;
+    border-color: rgba(220, 38, 38, 0.3) !important; /* Toque rojo sutil */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.bg-cyber-card:hover {
+    border-color: rgba(16, 185, 129, 0.5) !important; /* Toque verde al pasar el ratón */
+}
+
+/* Botones principales estilo Navidad (Rojo brillante con sombra festiva) */
+.btn-navidad-rojo {
+    background: linear-gradient(135deg, #e63946 0%, #b71c1c 100%);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(230, 57, 70, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-navidad-rojo:hover {
+    background: linear-gradient(135deg, #ff4d5a 0%, #c62828 100%);
+    box-shadow: 0 0 25px rgba(230, 57, 70, 0.7);
+}
+
+/* Acentos dorados para precios y destaques */
+.text-navidad-oro {
+    color: #ffd700 !important;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+/* Insignias navideñas */
+.badge-navidad {
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #34d399;
+}
+body {
+    background-color: #b91c1c !important;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWAzbUYL6ordQFncLPHDYy4FS81pKZ0p74dgt2UXYGbA&s=10') !important;
+    background-repeat: repeat !important;
+    background-size: 350px auto !important; /* Ajusta el tamaño del patrón si lo deseas */
+}
