@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="es" class="dark overflow-x-hidden">
 <head>
-    <!-- Se eliminó el enlace al manifest.json para evitar el error 404 local -->
     <meta name="theme-color" content="#b91c1c">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ZenithXmas | Recargas Gaming & Diamantes Navideños</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Tesseract.js para OCR en tiempo real -->
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script>
         tailwind.config = {
@@ -37,14 +34,10 @@
             }
         }
     </script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Inter & Orbitron -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
-    <!-- Custom CSS File -->
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ESTILO NAVIDEÑO PERMANENTE */
         body {
             background-color: #b91c1c !important;
             background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWAzbUYL6ordQFncLPHDYy4FS81pKZ0p74dgt2UXYGbA&s=10') !important;
@@ -126,7 +119,7 @@
 
         <!-- Top Banner Navideño -->
         <div class="bg-gradient-to-r from-red-800 via-emerald-800 to-red-900 text-[10px] sm:text-xs py-2 px-3 text-center font-medium border-b border-cyber-border text-yellow-300 leading-tight relative z-10 shadow-md">
-            <i class="fa-solid fa-holly-berry text-red-400 mr-1.5"></i> 🎄 ¡Especial Navideño! Recargas instantáneas con bonos festivos activos. ¡Felices Fiestas Gamer! 🎁
+            <i class="fa-solid fa-holly-berry text-red-400 mr-1.5"></i> 🎄 ¡Especial Navideño! Gana Points en compras exitosas para girar la ruleta o canjearlos por diamantes aquí mismo. 🎁
         </div>
 
         <!-- Header -->
@@ -158,7 +151,7 @@
 
                     <button onclick="switchTab('history')" id="nav-btn-history" class="group relative flex items-center justify-center p-2 text-gray-400 hover:text-white transition-all" title="Mis Órdenes">
                         <i class="fa-solid fa-clock-rotate-left text-xl"></i>
-                        <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyber-border text-white text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200 pointer-events-none shadow-xl z-50">Mis Órdenes</span>
+                        <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyber-border text-white text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none shadow-xl z-50">Mis Órdenes</span>
                     </button>
 
                     <button onclick="switchTab('support')" id="nav-btn-support" class="group relative flex items-center justify-center p-2 text-gray-400 hover:text-white transition-all" title="Ayuda / Soporte">
@@ -170,9 +163,28 @@
                         <i class="fa-solid fa-tv text-xl"></i>
                         <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyber-border text-white text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none shadow-xl z-50">Suscripciones</span>
                     </button>
+
+                    <a href="zenithbet.html" id="nav-btn-whobets" class="group relative flex items-center justify-center p-2 text-cyan-400 hover:text-white transition-all" title="Quién Apuesta">
+                        <i class="fa-solid fa-users-viewfinder text-xl"></i>
+                        <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyan-400 text-cyan-400 text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none shadow-xl z-50">Quién Apuesta</span>
+                    </a>
+
+                    <a href="ruleta.html" class="group relative flex items-center justify-center p-2 text-cyber-xmasGold hover:text-white transition-all" title="Ruleta">
+                        <i class="fa-solid fa-dharmachakra text-xl"></i>
+                        <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-cyber-card border border-cyber-xmasGold text-cyber-xmasGold text-[11px] font-bold tracking-wide whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none shadow-xl z-50">Ruleta</span>
+                    </a>
                 </nav>
 
                 <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+                    <!-- Badge de Points en Header (abre canje de diamantes) -->
+                    <button onclick="openDiamondPointsModal()" class="flex items-center space-x-1.5 bg-cyber-dark/90 border border-cyber-xmasGold/60 px-2.5 py-1.5 rounded-xl text-xs shadow-md hover:border-cyber-xmasGold transition-all" title="Canjear Points por Diamantes">
+                        <i class="fa-solid fa-coins text-cyber-xmasGold text-xs"></i>
+                        <div class="flex flex-col text-left leading-none">
+                            <span class="text-[7px] text-gray-400 uppercase tracking-widest font-orbitron">Points</span>
+                            <span id="header-user-points" class="text-cyber-xmasGold font-bold text-[10px] sm:text-xs font-mono">0 pts</span>
+                        </div>
+                    </button>
+
                     <button onclick="openLocationModal()" class="flex items-center space-x-2 bg-cyber-dark/80 border border-cyber-border px-3 py-1.5 rounded-xl text-xs shadow-md hover:border-red-500 transition-all group">
                         <i class="fa-solid fa-tree text-emerald-400 animate-pulse text-xs group-hover:scale-110 transition-transform"></i>
                         <div class="flex flex-col text-left">
@@ -218,6 +230,9 @@
             <div id="mobile-menu" class="hidden md:hidden bg-cyber-card border-b border-cyber-border px-4 py-3 space-y-2">
                 <button onclick="switchTab('catalog'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Catálogo</button>
                 <button onclick="switchTab('wallet'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Billetera</button>
+                <a href="zenithbet.html" class="block w-full text-left text-cyan-400 font-bold">Quién Apuesta</a>
+                <button onclick="openDiamondPointsModal(); toggleMobileMenu();" class="block w-full text-left text-cyber-xmasGold font-bold">Canjear Points por Diamantes</button>
+                <a href="ruleta.html" class="block w-full text-left text-cyan-300 font-bold">Ir a la Ruleta</a>
                 <button onclick="switchTab('subscriptions'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Suscripciones</button>
                 <button onclick="switchTab('history'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Historial</button>
                 <button onclick="switchTab('support'); toggleMobileMenu();" class="block w-full text-left text-gray-300">Soporte</button>
@@ -236,7 +251,21 @@
                     <div class="relative z-10 max-w-2xl space-y-2 sm:space-y-4">
                         <span class="inline-block px-3 py-1 rounded-full bg-red-500/20 border border-red-500 text-red-400 text-[10px] sm:text-xs font-semibold tracking-wider uppercase">🎄 Especial de Navidad 2026</span>
                         <h2 class="font-orbitron font-black text-xl sm:text-4xl text-white tracking-tight leading-tight break-words">RECARGAS NAVIDEÑAS <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-cyber-xmasGold to-emerald-400 block sm:inline">POR ID DE JUGADOR</span></h2>
-                        <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">Diamantes, pases y recargas instantáneas con verificación automática en Firestore y espíritu festivo.</p>
+                        <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">Diamantes, pases y recargas instantáneas con verificación automática en Firestore y Points acumulables para girar la ruleta o canjear diamantes.</p>
+                        <div class="flex flex-wrap gap-2.5 pt-2">
+                            <button onclick="openDiamondPointsModal()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-emerald-400 text-black font-orbitron font-bold text-xs uppercase tracking-wider shadow-lg hover:opacity-95 transition-all flex items-center space-x-2">
+                                <i class="fa-solid fa-gem"></i>
+                                <span>Canjear Points por Diamantes</span>
+                            </button>
+                            <a href="zenithbet.html" class="px-4 py-2.5 rounded-xl bg-cyber-dark border border-cyan-400 text-cyan-300 font-orbitron font-bold text-xs uppercase tracking-wider hover:bg-cyan-400 hover:text-black transition-all flex items-center space-x-2">
+                                <i class="fa-solid fa-users-viewfinder"></i>
+                                <span>Quién Apuesta</span>
+                            </a>
+                            <a href="ruleta.html" class="px-4 py-2.5 rounded-xl bg-cyber-dark border border-cyber-xmasGold text-cyber-xmasGold font-orbitron font-bold text-xs uppercase tracking-wider hover:bg-cyber-xmasGold hover:text-black transition-all flex items-center space-x-2">
+                                <i class="fa-solid fa-dharmachakra"></i>
+                                <span>Ir a la Ruleta</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -248,7 +277,7 @@
                         </div>
                         <div>
                             <h3 class="font-orbitron font-bold text-sm sm:text-base text-white">¡Evento Navideño Oficialmente Activo! 🎄</h3>
-                            <p class="text-xs text-cyber-xmasGold">Haz clic para ver todos los beneficios festivos y sorpresas</p>
+                            <p class="text-xs text-cyber-xmasGold">Usa tus Points para girar la ruleta o canjéalos por diamantes</p>
                         </div>
                     </div>
                     <button onclick="openBenefitsModal()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-gradient-to-r from-red-600 to-emerald-600 text-white font-bold text-xs uppercase tracking-wider shadow-xmas-glow hover:opacity-90 transition-all flex items-center justify-center space-x-2">
@@ -336,18 +365,26 @@
                 <div id="products-container" class="space-y-4 pt-2"></div>
             </section>
 
-            <!-- TAB: WALLET / BILLETERA DE SALDO -->
+            <!-- TAB: WALLET / BILLETERA DE SALDO + POINTS -->
             <section id="tab-wallet" class="hidden space-y-6">
-                <!-- 1. BILLETERA (MI SALDO DISPONIBLE) -->
                 <div class="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-cyber-card border border-cyber-border shadow-2xl relative overflow-hidden">
                     <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 relative z-10">
-                        <div>
-                            <span class="text-[10px] text-gray-400 uppercase tracking-widest block font-orbitron">Billetera Zenith XMAS</span>
-                            <h5 class="text-gray-300 text-xs sm:text-sm font-medium">Mi Saldo Disponible</h5>
-                            <h2 class="text-3xl sm:text-4xl font-orbitron font-black text-emerald-400 glow-text-cyan my-1" id="userWalletBalance">$0.00</h2>
+                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 relative z-10">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
+                            <div>
+                                <span class="text-[10px] text-gray-400 uppercase tracking-widest block font-orbitron">Billetera Zenith XMAS</span>
+                                <h5 class="text-gray-300 text-xs sm:text-sm font-medium">Mi Saldo Disponible</h5>
+                                <h2 class="text-3xl sm:text-4xl font-orbitron font-black text-emerald-400 glow-text-cyan my-1" id="userWalletBalance">$0.00</h2>
+                            </div>
+
+                            <div class="bg-cyber-dark/80 border border-cyber-xmasGold/40 rounded-2xl px-4 py-2.5">
+                                <span class="text-[9px] text-gray-400 uppercase tracking-widest block font-orbitron">Puntos Ganados</span>
+                                <span id="walletUserPoints" class="text-lg sm:text-xl font-orbitron font-black text-cyber-xmasGold">0 PTS</span>
+                                <p id="walletPointsValue" class="text-[10px] text-cyan-300 font-mono">Canjeables por Diamantes</p>
+                            </div>
                         </div>
-                        <div class="grid grid-cols-3 gap-2 w-full sm:w-auto">
+
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full lg:w-auto">
                             <button onclick="openDepositModal()" class="px-2 py-2.5 rounded-xl bg-red-600 text-white font-bold text-[10px] sm:text-xs uppercase tracking-wider shadow-xmas-glow hover:opacity-90 transition-all flex flex-col sm:flex-row items-center justify-center gap-1">
                                 <i class="fa-solid fa-circle-plus text-sm"></i>
                                 <span>Agregar</span>
@@ -360,7 +397,77 @@
                                 <i class="fa-solid fa-arrow-down-long text-sm"></i>
                                 <span>Retirar</span>
                             </button>
+                            <button onclick="openDiamondPointsModal()" class="px-2 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-emerald-400 text-black font-bold text-[10px] sm:text-xs uppercase tracking-wider shadow-md hover:opacity-90 transition-all flex flex-col sm:flex-row items-center justify-center gap-1" title="Canjea tus Points por Diamantes">
+                                <i class="fa-solid fa-gem text-sm"></i>
+                                <span>Diamantes</span>
+                            </button>
                         </div>
+                    </div>
+                </div>
+
+                <!-- CANJE DIRECTO DE POINTS POR DIAMANTES EN INDEX -->
+                <div class="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-cyber-card border border-cyan-400/40 shadow-xl space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-cyber-border pb-3">
+                        <div>
+                            <h3 class="font-orbitron font-bold text-sm sm:text-lg text-white flex items-center space-x-2">
+                                <i class="fa-solid fa-gem text-cyan-400"></i>
+                                <span>Canjear Points por Diamantes</span>
+                            </h3>
+                            <p class="text-[11px] text-gray-400">Usa tus Points acumulados para canjear diamantes directamente aquí o abre el modal rápido.</p>
+                        </div>
+                        <button onclick="openDiamondPointsModal()" class="px-4 py-2 rounded-xl bg-cyan-400 text-black font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-all self-start sm:self-auto">
+                            Abrir Canje Rápido
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                        <div>
+                            <label class="block text-gray-400 mb-1 font-semibold uppercase">Paquete</label>
+                            <select id="inline-diamond-package" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2.5 text-white font-bold focus:outline-none focus:border-cyan-400">
+                                <option value="110|100">110 Diamantes — 100 Points</option>
+                                <option value="341|280">341 Diamantes — 280 Points</option>
+                                <option value="572|450">572 Diamantes — 450 Points</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 mb-1 font-semibold uppercase">ID de Jugador</label>
+                            <input type="text" id="inline-diamond-player-id" placeholder="Ej. 12790483964" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2.5 text-white font-mono focus:outline-none focus:border-cyan-400">
+                        </div>
+                        <div class="flex items-end">
+                            <button type="button" onclick="confirmInlineDiamondPointsRedeem()" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-400 to-emerald-400 text-black font-orbitron font-bold text-xs uppercase tracking-wider hover:opacity-95 transition-all">
+                                Canjear Diamantes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HISTORIAL DE POINTS POR COMPRA EXITOSA -->
+                <div class="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-cyber-card border border-cyber-xmasGold/30 shadow-xl space-y-4">
+                    <div class="flex items-center justify-between border-b border-cyber-border pb-3">
+                        <h3 class="font-orbitron font-bold text-sm sm:text-lg text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-coins text-cyber-xmasGold"></i>
+                            <span>Historial de Points (Compras Exitosas y Canjes)</span>
+                        </h3>
+                        <span class="text-[10px] sm:text-xs text-cyber-xmasGold font-mono">10 pts por cada $1.00</span>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs text-gray-300 border-collapse">
+                            <thead>
+                                <tr class="border-b border-cyber-border text-gray-400 uppercase font-orbitron text-[9px] sm:text-[10px]">
+                                    <th class="p-2 sm:p-3">Fecha</th>
+                                    <th class="p-2 sm:p-3">Evento</th>
+                                    <th class="p-2 sm:p-3">Detalle</th>
+                                    <th class="p-2 sm:p-3">Compra</th>
+                                    <th class="p-2 sm:p-3 text-right">Points</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pointsHistoryTable" class="divide-y divide-cyber-border/50">
+                                <tr>
+                                    <td colspan="5" class="p-4 sm:p-6 text-center text-gray-500">Inicia sesión para ver tus Points ganados por compras exitosas.</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -401,7 +508,7 @@
                 <div class="bg-cyber-card p-6 rounded-3xl border border-cyber-border space-y-4">
                     <div>
                         <h2 class="font-orbitron font-bold text-xl sm:text-2xl text-white">Suscripciones Streaming Navideñas</h2>
-                        <p class="text-gray-400 text-xs">Cuentas oficiales con duración personalizada pagando con tu saldo de billetera.</p>
+                        <p class="text-gray-400 text-xs">Cuentas oficiales con duración personalizada pagando con tu saldo de billetera y acumulando Points.</p>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
@@ -441,7 +548,7 @@
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-cyber-card p-4 rounded-2xl border border-cyber-border">
                     <div>
                         <h2 class="font-orbitron font-bold text-base sm:text-2xl text-white">Historial de Órdenes XMAS</h2>
-                        <p class="text-gray-400 text-xs">Consulta el estado de tus compras y recargas en Firestore.</p>
+                        <p class="text-gray-400 text-xs">Consulta el estado de tus compras, canjes de diamantes y recargas en Firestore.</p>
                     </div>
                     <button onclick="loadUserOrders()" class="px-3 py-1.5 rounded-xl bg-cyber-dark border border-cyber-border text-emerald-400 text-xs font-semibold hover:bg-cyber-border transition-all flex items-center space-x-1">
                         <i class="fa-solid fa-rotate"></i>
@@ -488,6 +595,52 @@
             </section>
 
         </main>
+
+        <!-- MODAL CANJE DE POINTS POR DIAMANTES -->
+        <div id="diamond-points-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-3">
+            <div class="bg-cyber-card border-2 border-cyber-xmasGold w-full max-w-md rounded-2xl sm:rounded-3xl p-5 space-y-4 relative shadow-gold-glow max-h-[90vh] overflow-y-auto">
+                <div class="flex items-center justify-between border-b border-cyber-border pb-2.5">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-gem text-cyan-400 text-lg"></i>
+                        <h3 class="font-orbitron font-bold text-white text-sm">Canjear Points por Diamantes</h3>
+                    </div>
+                    <button onclick="closeDiamondPointsModal()" class="text-gray-400 hover:text-white text-lg">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="p-3 rounded-xl bg-cyber-dark border border-cyber-border flex items-center justify-between text-xs">
+                    <span class="text-gray-400">Tus Points disponibles:</span>
+                    <span id="modalAvailablePoints" class="font-orbitron font-black text-cyber-xmasGold text-sm">0 PTS</span>
+                </div>
+
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <label class="block text-gray-400 mb-1 font-semibold uppercase">Paquete de Diamantes</label>
+                        <select id="diamond-redeem-package" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2.5 text-white font-bold focus:outline-none focus:border-cyan-400">
+                            <option value="110|100">110 Diamantes — 100 Points</option>
+                            <option value="341|280">341 Diamantes — 280 Points</option>
+                            <option value="572|450">572 Diamantes — 450 Points</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-400 mb-1 font-semibold uppercase">ID de Jugador</label>
+                        <div class="flex space-x-2">
+                            <input type="text" id="diamond-redeem-player-id" placeholder="Ej. 12790483964" class="flex-grow bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2.5 text-white font-mono focus:outline-none focus:border-cyan-400">
+                            <button type="button" onclick="verifyDiamondRedeemId()" class="px-3.5 py-2.5 rounded-xl bg-cyan-500/20 border border-cyan-400 text-cyan-300 font-bold uppercase hover:bg-cyan-400 hover:text-black transition-all">
+                                Verificar
+                            </button>
+                        </div>
+                        <p id="diamond-redeem-verify-msg" class="hidden mt-1.5 text-[11px] font-mono"></p>
+                    </div>
+                </div>
+
+                <button type="button" onclick="confirmDiamondPointsRedeem()" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-emerald-400 text-black font-orbitron font-black text-xs uppercase tracking-wider shadow-lg hover:opacity-95 transition-all">
+                    <i class="fa-solid fa-gem mr-1"></i> Confirmar Canje de Diamantes
+                </button>
+            </div>
+        </div>
 
         <!-- Banner de Cookies -->
         <div id="cookie-banner" class="hidden fixed bottom-3 left-3 right-3 sm:left-6 sm:bottom-6 z-50 bg-cyber-card border border-red-500 p-4 rounded-2xl shadow-2xl space-y-3 max-w-lg mx-auto backdrop-blur-md">
@@ -774,7 +927,7 @@
                 <div class="flex items-center justify-between border-b border-cyber-border pb-3">
                     <div>
                         <h3 id="modal-title" class="font-orbitron font-bold text-white text-sm sm:text-base">Comprar Recarga Navideña</h3>
-                        <p class="text-[10px] text-emerald-400">Verificación oficial por Base de Datos ID</p>
+                        <p class="text-[10px] text-emerald-400">Verificación oficial por Base de Datos ID + Points por compra</p>
                     </div>
                     <button onclick="closeCheckoutModal()" class="w-7 h-7 rounded-full bg-cyber-border text-gray-400 hover:text-white flex items-center justify-center"><i class="fa-solid fa-xmark text-sm"></i></button>
                 </div>
@@ -783,6 +936,7 @@
                         <div>
                             <span class="text-[9px] text-gray-400 uppercase tracking-wider block">Producto</span>
                             <h4 id="checkout-product-name" class="font-bold text-white text-xs sm:text-sm">110 Diamantes</h4>
+                            <span id="checkout-product-points" class="text-[10px] text-cyber-xmasGold font-mono font-bold">Ganas +10 Points</span>
                         </div>
                         <div class="text-right">
                             <span class="text-[9px] text-gray-400 uppercase tracking-wider block">Precio</span>
@@ -790,7 +944,6 @@
                         </div>
                     </div>
 
-                    <!-- Verificador de ID de Jugador -->
                     <div id="dynamic-checkout-fields" class="space-y-1.5">
                         <label id="main-input-label" class="block text-[10px] font-semibold text-gray-300 uppercase tracking-wider">ID de Jugador / UID</label>
                         <div class="flex space-x-2" id="input-fields-wrapper">
@@ -811,7 +964,6 @@
                         </div>
                     </div>
 
-                    <!-- Verificador de Código de Descuento -->
                     <div class="space-y-1.5 pt-1">
                         <label class="block text-[10px] font-semibold text-gray-300 uppercase tracking-wider">Ingresa tu código de descuento</label>
                         <div class="flex space-x-2">
@@ -866,6 +1018,37 @@
             </div>
         </div>
 
+        <!-- Modal Suscripción -->
+        <div id="sub-checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-3">
+            <div class="bg-cyber-card border border-cyber-border w-full max-w-md rounded-2xl sm:rounded-3xl p-5 space-y-4 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+                <div class="flex items-center justify-between border-b border-cyber-border pb-2">
+                    <h3 id="sub-modal-title" class="font-orbitron font-bold text-white text-sm">Comprar Suscripción</h3>
+                    <button onclick="closeSubModal()" class="text-gray-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <label class="block text-gray-400 mb-1 font-semibold uppercase">Correo de Entrega</label>
+                        <input type="email" id="sub-email" placeholder="cliente@correo.com" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2.5 text-white text-xs focus:outline-none focus:border-red-500">
+                    </div>
+                    <div>
+                        <label class="block text-gray-400 mb-1 font-semibold uppercase">Teléfono / WhatsApp</label>
+                        <input type="text" id="sub-phone" placeholder="0999999999" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2.5 text-white text-xs focus:outline-none focus:border-red-500">
+                    </div>
+                    <div>
+                        <label class="block text-gray-400 mb-1 font-semibold uppercase">Duración (Ej. 1 Mes, 2 Meses)</label>
+                        <input type="text" id="sub-duration" oninput="calculateSubTotal()" value="1 Mes" class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2.5 text-white text-xs focus:outline-none focus:border-red-500">
+                    </div>
+                    <div class="p-3 rounded-xl bg-cyber-dark border border-cyber-border flex items-center justify-between">
+                        <span class="text-gray-300 font-semibold">Total a Pagar:</span>
+                        <span id="sub-total-price" class="font-orbitron font-bold text-emerald-400 text-base">$0.00</span>
+                    </div>
+                </div>
+                <button onclick="processSubscriptionPurchase()" class="w-full py-3 rounded-xl bg-gradient-to-r from-red-600 to-emerald-600 text-white font-bold text-xs uppercase tracking-wider shadow-lg hover:opacity-90 transition-all">
+                    Pagar con Saldo y Ganar Points
+                </button>
+            </div>
+        </div>
+
         <!-- Modal Auth -->
         <div id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-3">
             <div class="bg-cyber-card border border-cyber-border w-full max-w-md rounded-2xl sm:rounded-3xl p-5 space-y-4 relative">
@@ -880,7 +1063,7 @@
             </div>
         </div>
 
-        <!-- 🎁 SUBPANTALLA / MODAL FLOTANTE DE BENEFICIOS NAVIDEÑOS -->
+        <!-- SUBPANTALLA / MODAL FLOTANTE DE BENEFICIOS NAVIDEÑOS -->
         <div id="benefits-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden p-4">
             <div class="bg-cyber-card border-2 border-red-500 w-full max-w-lg rounded-3xl p-6 space-y-5 relative shadow-xmas-glow max-h-[90vh] overflow-y-auto">
                 <div class="flex items-center justify-between border-b border-cyber-border pb-3">
@@ -906,24 +1089,16 @@
 
                     <ul class="space-y-2.5 text-xs text-gray-300">
                         <li class="bg-cyber-dark p-3 rounded-xl border border-cyber-border flex items-center space-x-3">
+                            <i class="fa-solid fa-coins text-cyber-xmasGold text-base"></i>
+                            <span><strong>POINTS POR COMPRA EXITOSA:</strong> Gana <strong>10 Points por cada $1.00</strong> para girar la ruleta o canjearlos por diamantes aquí mismo.</span>
+                        </li>
+                        <li class="bg-cyber-dark p-3 rounded-xl border border-cyber-border flex items-center space-x-3">
                             <i class="fa-solid fa-tag text-yellow-400 text-base"></i>
                             <span><strong>CÓDIGO DE DESCUENTO:</strong> Usa <code class="text-yellow-300 font-mono font-bold">XMAS2026</code> en tu checkout.</span>
                         </li>
                         <li class="bg-cyber-dark p-3 rounded-xl border border-cyber-border flex items-center space-x-3">
                             <i class="fa-solid fa-gem text-cyan-400 text-base animate-pulse"></i>
-                            <span><strong>DIAMANTE GRATIS:</strong> Sorteos diarios y bonos sorpresa aplicados.</span>
-                        </li>
-                        <li class="bg-cyber-dark p-3 rounded-xl border border-cyber-border flex items-center space-x-3">
-                            <i class="fa-solid fa-champagne-glasses text-purple-400 text-base"></i>
-                            <span><strong>FESTEJA CON NOSOTROS:</strong> Doble puntuación en el Podio VIP local.</span>
-                        </li>
-                        <li onclick="triggerSecretSurprise()" class="bg-cyber-dark p-3 rounded-xl border border-purple-500/50 flex items-center space-x-3 cursor-pointer hover:border-red-400 transition-all group">
-                            <i class="fa-solid fa-wand-magic-sparkles text-pink-400 text-base group-hover:scale-125 transition-transform"></i>
-                            <span><strong>🎁 COSITA OCULTA:</strong> <span class="text-pink-400 underline">Encuéntralo en esta página web</span></span>
-                        </li>
-                        <li class="bg-cyber-dark p-3 rounded-xl border border-cyber-border flex items-center space-x-3">
-                            <i class="fa-solid fa-champagne-glasses text-purple-400 text-base"></i>
-                            <span><strong>TODO NUESTRO EVENTO COMIENZA EN:</strong> 1 DE DICIEMBRE DE 2026</span>
+                            <span><strong>CANJE DE DIAMANTES:</strong> Canjea tus Points directamente por diamantes en la sección de Billetera.</span>
                         </li>
                     </ul>
                 </div>
@@ -950,16 +1125,14 @@
             <div class="flex justify-center space-x-6">
                 <a href="politica-privacidad.html" class="hover:text-red-400 transition-colors">Política de Privacidad</a>
                 <a href="terminos.html" class="hover:text-red-400 transition-colors">Términos y Seguridad</a>
-                <a href="faq" class="hover:text-red-400 transition-colors">Faq</a>
+                <a href="ruleta.html" class="hover:text-cyber-xmasGold transition-colors">Ruleta</a>
             </div>
             <p>&copy; 2026 ZenithRecargas Ecuador (Edición Navideña). Operado con Firebase y Cloud Firestore.</p>
         </footer>
 
     </div>
 
-    <!-- Script JavaScript -->
     <script>
-        // Funciones para controlar la subpantalla / modal de beneficios
         function openBenefitsModal() {
             document.getElementById("benefits-modal").classList.remove("hidden");
         }
@@ -968,7 +1141,6 @@
             document.getElementById("benefits-modal").classList.add("hidden");
         }
 
-        // Función interactiva de la "cosita oculta"
         function triggerSecretSurprise() {
             if (typeof showNotification === 'function') {
                 showNotification("🎁 ¡COSITA OCULTA!", "Encuéntralo en esta página web.", "success");
@@ -976,53 +1148,8 @@
                 alert("🎁 ¡COSITA OCULTA! Encuéntralo en esta página web.");
             }
         }
-
-        // Simulador de verificación de código de descuento
-        window.verifyDiscountCode = function() {
-            const inputVal = document.getElementById('discount-code-input').value.trim();
-            const resultBox = document.getElementById('discount-verification-result');
-            const resultTitle = document.getElementById('discount-result-title');
-            const resultText = document.getElementById('discount-result-text');
-            const resultIcon = document.getElementById('discount-result-icon');
-
-            if (!inputVal) {
-                alert('Por favor ingresa un código de descuento.');
-                return;
-            }
-
-            resultBox.classList.remove('hidden', 'bg-green-950/40', 'border-green-500/40', 'bg-red-950/40', 'border-red-500/40');
-            resultBox.classList.add('bg-amber-950/40', 'border-amber-500/40');
-            resultIcon.className = "w-7 h-7 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs";
-            resultIcon.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
-            resultTitle.className = "text-[9px] text-amber-400 uppercase font-bold tracking-wider block";
-            resultTitle.innerText = "Sistema";
-            resultText.innerText = "Verificando código...";
-
-            setTimeout(() => {
-                const validCodes = ['XMAS2026', 'ZENITH50', 'NAVIDAD2026', 'VIPSABANILLA2026'];
-
-                if (validCodes.includes(inputVal.toUpperCase())) {
-                    resultBox.classList.remove('bg-amber-950/40', 'border-amber-500/40', 'bg-red-950/40', 'border-red-500/40');
-                    resultBox.classList.add('bg-green-950/40', 'border-green-500/40');
-                    resultIcon.className = "w-7 h-7 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center text-xs";
-                    resultIcon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
-                    resultTitle.className = "text-[9px] text-green-400 uppercase font-bold tracking-wider block";
-                    resultTitle.innerText = "Promoción Activa";
-                    resultText.innerText = "Descuento Aplicado";
-                } else {
-                    resultBox.classList.remove('bg-amber-950/40', 'border-amber-500/40', 'bg-green-950/40', 'border-green-500/40');
-                    resultBox.classList.add('bg-red-950/40', 'border-red-500/40');
-                    resultIcon.className = "w-7 h-7 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center text-xs";
-                    resultIcon.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
-                    resultTitle.className = "text-[9px] text-red-400 uppercase font-bold tracking-wider block";
-                    resultTitle.innerText = "Error de Código";
-                    resultText.innerText = "Código De Descuento no válido";
-                }
-            }, 800);
-        };
     </script>
 
-    <!-- App Logic Script principal -->
     <script src="app.js" type="module"></script>
 </body>
 </html>
