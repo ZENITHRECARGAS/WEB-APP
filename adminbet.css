@@ -1,0 +1,32 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.adminbet-bg {
+    background-color: #0a0b10;
+    background-image:
+        radial-gradient(circle at 15% 15%, rgba(255, 0, 127, 0.10) 0%, transparent 45%),
+        radial-gradient(circle at 85% 20%, rgba(0, 240, 255, 0.10) 0%, transparent 45%),
+        linear-gradient(180deg, #0a0b10 0%, #0d0f18 100%);
+}
+
+.lock-toggle-btn.is-unlocked {
+    border-color: rgba(42, 47, 76, 0.95);
+    background-color: #121420;
+    color: #d1d5db;
+}
+
+.lock-toggle-btn.is-unlocked:hover {
+    border-color: #00f0ff;
+    color: #00f0ff;
+}
+
+.lock-toggle-btn.is-locked {
+    border-color: rgba(244, 63, 94, 0.8);
+    background-color: rgba(244, 63, 94, 0.18);
+    color: #fda4af;
+}

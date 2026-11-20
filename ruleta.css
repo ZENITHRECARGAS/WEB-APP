@@ -1,0 +1,125 @@
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0a0b10;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.ruleta-shell {
+    min-height: 100dvh;
+    width: 100%;
+}
+
+.ruleta-safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+}
+
+.ruleta-safe-bottom {
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.ruleta-bg {
+    background-color: #0a0b10;
+    background-image:
+        radial-gradient(circle at 20% 20%, rgba(0, 240, 255, 0.08), transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(255, 0, 127, 0.08), transparent 40%),
+        linear-gradient(to right, rgba(42, 47, 76, 0.22) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(42, 47, 76, 0.22) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+}
+
+.wheel-stage {
+    position: relative;
+    width: 268px;
+    height: 268px;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 640px) {
+    .wheel-stage {
+        width: 380px;
+        height: 380px;
+    }
+}
+
+.wheel-pointer {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    font-size: 2.3rem;
+    color: #00f0ff;
+    filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.85));
+    pointer-events: none;
+}
+
+.wheel-ring {
+    width: 100%;
+    height: 100%;
+    border-radius: 9999px;
+    padding: 7px;
+    background: linear-gradient(135deg, #00f0ff, #b000ff, #ff007f);
+    box-shadow: 0 0 28px rgba(0, 240, 255, 0.25), 0 0 45px rgba(255, 0, 127, 0.18);
+}
+
+#ruletaCanvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 9999px;
+    background: #121420;
+    transition: transform 4.5s cubic-bezier(0.15, 0.85, 0.25, 1);
+    will-change: transform;
+}
+
+.android-input {
+    font-size: 16px;
+}
+
+.touch-btn {
+    touch-action: manipulation;
+}
+
+/* ==========================================
+   PANTALLA DE BLOQUEO ANTI-MANIPULACIÓN
+   ========================================== */
+#anti-cheat-lockout {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: rgba(6, 7, 13, 0.97);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    text-align: center;
+    user-select: none;
+}
+
+#anti-cheat-lockout.hidden {
+    display: none !important;
+}
+
+.lockout-card {
+    max-width: 440px;
+    width: 100%;
+    background: #121420;
+    border: 1px solid rgba(255, 0, 127, 0.55);
+    border-radius: 1.5rem;
+    padding: 2rem 1.75rem;
+    box-shadow: 0 0 35px rgba(255, 0, 127, 0.3);
+}

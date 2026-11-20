@@ -1,0 +1,56 @@
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0a0b10;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.admin-shell {
+    min-height: 100dvh;
+    width: 100%;
+}
+
+.admin-safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+}
+
+.admin-safe-bottom {
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.admin-bg {
+    background-color: #0a0b10;
+    background-image:
+        radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.08), transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(255, 0, 127, 0.08), transparent 40%),
+        linear-gradient(to right, rgba(42, 47, 76, 0.2) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(42, 47, 76, 0.2) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+}
+
+.android-input {
+    font-size: 16px;
+}
+
+.touch-btn {
+    touch-action: manipulation;
+}
+
+.color-swatch-input {
+    width: 44px;
+    height: 40px;
+    padding: 2px;
+    border-radius: 10px;
+    background: #0a0b10;
+    border: 1px solid #2a2f4c;
+    cursor: pointer;
+}

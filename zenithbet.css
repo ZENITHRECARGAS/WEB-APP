@@ -1,0 +1,66 @@
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.android-shell {
+    min-height: 100dvh;
+    width: 100%;
+}
+
+.android-safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+}
+
+.android-safe-bottom {
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.zenithbet-bg {
+    background-color: #0a0b10;
+    background-image:
+        radial-gradient(circle at 20% 15%, rgba(0, 240, 255, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 85% 20%, rgba(255, 0, 127, 0.10) 0%, transparent 45%),
+        linear-gradient(180deg, #0a0b10 0%, #0d0f18 100%);
+}
+
+/* Evita zoom automático al enfocar inputs en navegadores Android */
+.android-input {
+    font-size: 16px;
+}
+
+/* Ocultar scrollbar horizontal pero permitir deslizamiento táctil suave */
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.odds-btn {
+    touch-action: manipulation;
+    transition: transform 0.15s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.odds-btn:active {
+    transform: scale(0.97);
+}
+
+.odds-btn.selected {
+    border-color: #00f0ff;
+    background-color: rgba(0, 240, 255, 0.14);
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.25);
+}
