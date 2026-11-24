@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ZenithRecargas | AdminBet — Control de Cuotas y Bloqueos</title>
+    <title>ZenithRecargas | AdminBet — Marcador, Mercados, Cuotas y Minuto a Minuto</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -37,22 +37,22 @@
 
     <!-- HEADER -->
     <header class="sticky top-0 z-40 backdrop-blur-md bg-cyber-dark/90 border-b border-cyber-border">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyber-neonPink to-cyber-neonCyan p-0.5 flex items-center justify-center shadow-neon-pink">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2">
+            <div class="flex items-center space-x-3 min-w-0">
+                <div class="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-tr from-cyber-neonPink to-cyber-neonCyan p-0.5 flex items-center justify-center shadow-neon-pink">
                     <div class="w-full h-full bg-cyber-dark rounded-[10px] flex items-center justify-center">
                         <i class="fa-solid fa-sliders text-cyber-neonPink text-lg"></i>
                     </div>
                 </div>
-                <div>
-                    <h1 class="font-orbitron font-black text-lg sm:text-xl tracking-wider text-white">
+                <div class="min-w-0">
+                    <h1 class="font-orbitron font-black text-lg sm:text-xl tracking-wider text-white truncate">
                         ADMIN<span class="text-cyber-neonPink">BET</span>
                     </h1>
-                    <p class="text-[10px] text-gray-400 tracking-widest uppercase">Cuotas • Bloqueos • Liquidación (IVA 15%)</p>
+                    <p class="text-[10px] text-gray-400 tracking-widest uppercase truncate">1X2 • Primer Gol • Mercados • Goles • Córners</p>
                 </div>
             </div>
 
-            <div class="flex items-center space-x-2.5">
+            <div class="flex items-center space-x-2 shrink-0">
                 <a href="zenithbet.html" class="px-3.5 py-2 rounded-xl bg-cyber-card border border-cyber-neonCyan/50 hover:border-cyber-neonCyan text-xs font-bold text-cyber-neonCyan transition-all flex items-center space-x-1.5">
                     <i class="fa-solid fa-futbol"></i>
                     <span>Ver ZenithBet</span>
@@ -68,15 +68,15 @@
     <!-- CONTENIDO PRINCIPAL -->
     <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
-        <!-- CARD PRINCIPAL: EDITAR CUOTAS Y BLOQUEAR -->
+        <!-- 1. PARTIDO, MARCADOR Y CUOTAS 1X2 -->
         <section class="bg-cyber-card/95 border border-cyber-border rounded-3xl p-6 space-y-6 shadow-2xl">
             <div class="flex flex-wrap items-center justify-between gap-2 border-b border-cyber-border pb-4">
                 <div>
                     <h2 class="font-orbitron font-bold text-base sm:text-lg text-white uppercase tracking-wider">
-                        Subir / Editar Cuotas y Bloquear Selecciones
+                        Marcador, Apuesta 1X2 y Bloqueos
                     </h2>
                     <p class="text-xs text-gray-400 mt-0.5">
-                        Los cambios se sincronizan en tiempo real con <span class="text-cyber-neonCyan font-mono">zenithbet.html</span> y disparan la animación de 3s.
+                        Selecciona un partido, ajusta marcador, cuotas 1X2 o crea un partido nuevo.
                     </p>
                 </div>
                 <span id="adminbet-status-badge" class="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyber-neonCyan text-[11px] font-mono">
@@ -87,7 +87,7 @@
             <!-- SELECTOR DE PARTIDO -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
                 <div class="md:col-span-2 space-y-1.5">
-                    <label for="adminbetMatchSelect" class="block text-xs font-bold text-gray-300 uppercase">Partido Programado:</label>
+                    <label for="adminbetMatchSelect" class="block text-xs font-bold text-gray-300 uppercase">Partido:</label>
                     <select
                         id="adminbetMatchSelect"
                         onchange="onAdminMatchChange()"
@@ -105,7 +105,7 @@
                 </div>
             </div>
 
-            <!-- FORMULARIO NUEVO PARTIDO (OCULTO POR DEFECTO) -->
+            <!-- FORMULARIO NUEVO PARTIDO -->
             <div id="customMatchBox" class="hidden bg-cyber-dark/90 border border-cyber-neonPurple/50 rounded-2xl p-4 space-y-4">
                 <div class="flex items-center justify-between">
                     <h3 class="font-orbitron font-bold text-xs uppercase text-purple-300">Crear Partido Manual</h3>
@@ -124,10 +124,68 @@
                 </button>
             </div>
 
-            <!-- CUOTAS (LOCAL / EMPATE / VISITA) -->
+            <!-- MARCADOR -->
+            <div class="bg-cyber-dark/90 border border-cyber-border rounded-2xl p-4 sm:p-5 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-cyber-border/70 pb-3">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-futbol text-cyber-neonGreen"></i>
+                        <h3 class="font-orbitron font-bold text-xs sm:text-sm uppercase text-white">Marcador del Partido</h3>
+                    </div>
+                    <button
+                        type="button"
+                        id="adminbetForceLiveBtn"
+                        onclick="toggleForceLive()"
+                        class="px-3 py-1.5 rounded-xl border text-[11px] font-orbitron font-bold uppercase cursor-pointer transition-all"
+                    >
+                        ESTADO: AUTO (+2 MIN)
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
+                    <div class="bg-cyber-card border border-cyber-border rounded-2xl p-3.5 space-y-2 text-center">
+                        <p id="adminbetHomeLabel" class="text-xs font-bold text-cyber-neonCyan truncate">Local</p>
+                        <div class="flex items-center justify-center space-x-2">
+                            <button type="button" onclick="adjustAdminScore('home', -1)" class="w-8 h-8 rounded-xl bg-cyber-dark border border-cyber-border hover:border-rose-400 font-bold text-white cursor-pointer">-</button>
+                            <input
+                                type="number"
+                                min="0"
+                                id="adminbetHomeScore"
+                                value="0"
+                                oninput="refreshScorePreview()"
+                                class="w-16 bg-cyber-dark border border-cyber-border rounded-xl px-2 py-1.5 text-center font-orbitron font-black text-lg text-white focus:outline-none focus:border-cyber-neonCyan"
+                            >
+                            <button type="button" onclick="adjustAdminScore('home', 1)" class="w-8 h-8 rounded-xl bg-cyber-dark border border-cyber-border hover:border-emerald-400 font-bold text-emerald-300 cursor-pointer">+</button>
+                        </div>
+                    </div>
+
+                    <div class="text-center space-y-1">
+                        <span class="text-[10px] font-mono uppercase text-gray-400">Marcador</span>
+                        <p id="adminbetScorePreview" class="font-orbitron font-black text-2xl text-white">0 - 0</p>
+                        <span class="text-[11px] font-mono text-gray-400">Resultado 1X2</span>
+                    </div>
+
+                    <div class="bg-cyber-card border border-cyber-border rounded-2xl p-3.5 space-y-2 text-center">
+                        <p id="adminbetAwayLabel" class="text-xs font-bold text-cyber-neonPink truncate">Visita</p>
+                        <div class="flex items-center justify-center space-x-2">
+                            <button type="button" onclick="adjustAdminScore('away', -1)" class="w-8 h-8 rounded-xl bg-cyber-dark border border-cyber-border hover:border-rose-400 font-bold text-white cursor-pointer">-</button>
+                            <input
+                                type="number"
+                                min="0"
+                                id="adminbetAwayScore"
+                                value="0"
+                                oninput="refreshScorePreview()"
+                                class="w-16 bg-cyber-dark border border-cyber-border rounded-xl px-2 py-1.5 text-center font-orbitron font-black text-lg text-white focus:outline-none focus:border-cyber-neonCyan"
+                            >
+                            <button type="button" onclick="adjustAdminScore('away', 1)" class="w-8 h-8 rounded-xl bg-cyber-dark border border-cyber-border hover:border-emerald-400 font-bold text-emerald-300 cursor-pointer">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CUOTAS 1X2 -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div class="bg-cyber-dark border border-cyber-border rounded-2xl p-4 space-y-3">
-                    <label for="adminbetHomeOdds" class="block text-xs font-bold text-gray-300 uppercase">Cuota Local</label>
+                    <label for="adminbetHomeOdds" class="block text-xs font-bold text-gray-300 uppercase">1 • Cuota Local</label>
                     <input
                         type="number"
                         id="adminbetHomeOdds"
@@ -147,7 +205,7 @@
                 </div>
 
                 <div class="bg-cyber-dark border border-cyber-border rounded-2xl p-4 space-y-3">
-                    <label for="adminbetDrawOdds" class="block text-xs font-bold text-gray-300 uppercase">Cuota Empate</label>
+                    <label for="adminbetDrawOdds" class="block text-xs font-bold text-gray-300 uppercase">X • Cuota Empate</label>
                     <input
                         type="number"
                         id="adminbetDrawOdds"
@@ -167,7 +225,7 @@
                 </div>
 
                 <div class="bg-cyber-dark border border-cyber-border rounded-2xl p-4 space-y-3">
-                    <label for="adminbetAwayOdds" class="block text-xs font-bold text-gray-300 uppercase">Cuota Visita</label>
+                    <label for="adminbetAwayOdds" class="block text-xs font-bold text-gray-300 uppercase">2 • Cuota Visita</label>
                     <input
                         type="number"
                         id="adminbetAwayOdds"
@@ -186,15 +244,149 @@
                     </button>
                 </div>
             </div>
+        </section>
 
-            <div class="flex flex-wrap items-center justify-between gap-4 pt-1">
+        <!-- 2. AGREGAR Y ADMINISTRAR MÁS APUESTAS (2 O 3+ OPCIONES) -->
+        <section class="bg-cyber-card/95 border border-cyber-border rounded-3xl p-6 space-y-5 shadow-2xl">
+            <div class="border-b border-cyber-border pb-4">
+                <h2 class="font-orbitron font-bold text-base sm:text-lg text-white uppercase tracking-wider flex items-center space-x-2">
+                    <i class="fa-solid fa-layer-group text-cyber-neonCyan"></i>
+                    <span>Agregar y Administrar Más Apuestas (Mercados y Cuotas)</span>
+                </h2>
+                <p class="text-xs text-gray-400 mt-0.5">
+                    Crea apuestas de 2 o 3 opciones (como <span class="text-cyber-neonCyan font-semibold">Primer Gol</span>: Local / Nadie / Visitante, <span class="text-cyber-neonCyan font-semibold">Ambos Marcan</span> o <span class="text-cyber-neonCyan font-semibold">Más/Menos 2.5</span>) y administra todas sus cuotas.
+                </p>
+            </div>
+
+            <!-- CONSTRUCTOR DE MERCADO CON 2 O 3 OPCIONES -->
+            <div class="bg-cyber-dark border border-cyber-border rounded-2xl p-4 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-[11px] font-orbitron font-bold uppercase text-cyber-neonCyan">Nuevo Mercado / Apuesta</span>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" onclick="fillPresetMarket('first_goal')" class="py-1.5 px-3 rounded-xl bg-cyber-card border border-emerald-500/40 hover:border-emerald-400 text-[11px] font-bold text-emerald-300 cursor-pointer">
+                            + Primer Gol (3 Cuotas)
+                        </button>
+                        <button type="button" onclick="fillPresetMarket('btts')" class="py-1.5 px-3 rounded-xl bg-cyber-card border border-cyber-border hover:border-cyber-neonCyan text-[11px] font-bold text-gray-200 cursor-pointer">
+                            + Ambos Marcan
+                        </button>
+                        <button type="button" onclick="fillPresetMarket('over25')" class="py-1.5 px-3 rounded-xl bg-cyber-card border border-cyber-border hover:border-cyber-neonCyan text-[11px] font-bold text-gray-200 cursor-pointer">
+                            + Más/Menos 2.5
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-3 items-end">
+                    <div class="lg:col-span-3 space-y-1">
+                        <label for="newMarketTitle" class="block text-[11px] font-bold text-gray-300 uppercase">Nombre de la Apuesta / Mercado</label>
+                        <input
+                            type="text"
+                            id="newMarketTitle"
+                            placeholder="Ej. Primer Gol o Ambos Marcan o Más de 2.5 Goles"
+                            class="w-full bg-cyber-card border border-cyber-border rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyber-neonCyan"
+                        >
+                    </div>
+                    <div>
+                        <button
+                            type="button"
+                            onclick="addDraftOptionRow()"
+                            class="w-full py-2.5 px-3 rounded-xl bg-cyber-card border border-cyber-neonPurple/60 hover:border-cyber-neonPurple text-xs font-orbitron font-bold text-purple-200 uppercase cursor-pointer"
+                        >
+                            <i class="fa-solid fa-plus mr-1"></i> Añadir Opción
+                        </button>
+                    </div>
+                </div>
+
+                <!-- FILAS DINÁMICAS DE OPCIONES Y CUOTAS -->
+                <div id="newMarketOptionsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
+
+                <div class="flex justify-end pt-1">
+                    <button
+                        type="button"
+                        onclick="addExtraMarket()"
+                        class="px-5 py-2.5 rounded-xl bg-cyber-neonCyan text-black font-orbitron font-bold text-xs uppercase cursor-pointer hover:opacity-90"
+                    >
+                        <i class="fa-solid fa-circle-plus mr-1"></i> Agregar Mercado al Partido
+                    </button>
+                </div>
+            </div>
+
+            <!-- LISTA DE MERCADOS / APUESTAS DEL PARTIDO -->
+            <div id="adminbetExtraMarketsList" class="space-y-3"></div>
+        </section>
+
+        <!-- 3. EVENTOS POR MINUTO: GOL, TARJETA AMARILLA, CÓRNER -->
+        <section class="bg-cyber-card/95 border border-cyber-border rounded-3xl p-6 space-y-5 shadow-2xl">
+            <div class="border-b border-cyber-border pb-4">
+                <h2 class="font-orbitron font-bold text-base sm:text-lg text-white uppercase tracking-wider flex items-center space-x-2">
+                    <i class="fa-solid fa-stopwatch text-amber-400"></i>
+                    <span>Eventos del Partido (Gol, Tarjeta Amarilla, Córner y Minuto)</span>
+                </h2>
+                <p class="text-xs text-gray-400 mt-0.5">
+                    Indica el tipo de evento, equipo y <strong>en qué minuto</strong> ocurrió. Si registras un <strong>Gol</strong>, también suma al marcador automáticamente.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-end bg-cyber-dark border border-cyber-border rounded-2xl p-4">
+                <div class="space-y-1">
+                    <label for="eventTypeSelect" class="block text-[11px] font-bold text-gray-300 uppercase">Tipo de Evento</label>
+                    <select id="eventTypeSelect" class="w-full bg-cyber-card border border-cyber-border rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-cyber-neonCyan">
+                        <option value="gol">⚽ Gol</option>
+                        <option value="amarilla">🟨 Tarjeta Amarilla</option>
+                        <option value="corner">🚩 Córner</option>
+                        <option value="roja">🟥 Tarjeta Roja</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <label for="eventTeamSelect" class="block text-[11px] font-bold text-gray-300 uppercase">Equipo</label>
+                    <select id="eventTeamSelect" class="w-full bg-cyber-card border border-cyber-border rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-cyber-neonCyan">
+                        <option value="home">Local</option>
+                        <option value="away">Visita</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <label for="eventMinuteInput" class="block text-[11px] font-bold text-gray-300 uppercase">Minuto</label>
+                    <input
+                        type="text"
+                        id="eventMinuteInput"
+                        placeholder="Ej. 34' o 45+2'"
+                        class="w-full bg-cyber-card border border-cyber-border rounded-xl px-3 py-2.5 text-xs font-mono text-amber-300 focus:outline-none focus:border-cyber-neonCyan"
+                    >
+                </div>
+
+                <div class="space-y-1">
+                    <label for="eventNoteInput" class="block text-[11px] font-bold text-gray-300 uppercase">Detalle (Opcional)</label>
+                    <input
+                        type="text"
+                        id="eventNoteInput"
+                        placeholder="Ej. Bellingham / Tiro libre"
+                        class="w-full bg-cyber-card border border-cyber-border rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-cyber-neonCyan"
+                    >
+                </div>
+
+                <div>
+                    <button
+                        type="button"
+                        onclick="addMatchEventItem()"
+                        class="w-full py-2.5 px-3 rounded-xl bg-amber-400 text-black font-orbitron font-bold text-xs uppercase cursor-pointer hover:opacity-90"
+                    >
+                        <i class="fa-solid fa-plus mr-1"></i> Añadir Evento
+                    </button>
+                </div>
+            </div>
+
+            <div id="adminbetEventsList" class="space-y-2"></div>
+
+            <!-- GUARDAR TODO -->
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-cyber-border/70">
                 <div id="adminbetFeedback" class="text-xs text-gray-300"></div>
                 <button
                     type="button"
                     onclick="saveMatchOddsAndLocks()"
                     class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyber-neonCyan via-blue-500 to-cyber-neonPink text-black font-orbitron font-black text-xs uppercase tracking-wider shadow-neon-cyan hover:opacity-95 transition-all cursor-pointer"
                 >
-                    <i class="fa-solid fa-cloud-arrow-up mr-1.5"></i> SUBIR CUOTAS Y BLOQUEOS
+                    <i class="fa-solid fa-cloud-arrow-up mr-1.5"></i> GUARDAR TODO EN VIVO
                 </button>
             </div>
         </section>
@@ -203,7 +395,7 @@
         <section class="bg-cyber-card/90 border border-cyber-border rounded-3xl p-6 space-y-4">
             <h3 class="font-orbitron font-bold text-sm uppercase tracking-wider text-white flex items-center space-x-2">
                 <i class="fa-solid fa-list-check text-cyber-neonCyan"></i>
-                <span>Estado Actual de Partidos y Cuotas</span>
+                <span>Resumen de Partidos, Marcadores y Cuotas</span>
             </h3>
             <div id="adminbetMatchesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs"></div>
         </section>
@@ -211,7 +403,7 @@
     </main>
 
     <footer class="mt-12 border-t border-cyber-border bg-cyber-card/60 py-6 text-center text-xs text-gray-500">
-        AdminBet • Panel de Cuotas y Bloqueos &copy; 2026
+        AdminBet • Marcador, Mercados, Cuotas y Minuto a Minuto &copy; 2026
     </footer>
 
     <script type="module" src="adminbet.js"></script>
