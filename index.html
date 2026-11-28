@@ -315,54 +315,136 @@
                     </div>
                 </div>
 
-                <!-- Selector de Videojuegos -->
-                <div class="pt-2">
-                    <div class="flex items-center justify-between mb-3 sm:mb-6">
+                <!-- CUADRÍCULA DE JUEGOS (PASO 1: ELEGIR JUEGO) -->
+                <div id="games-selection-wrapper" class="pt-2 space-y-4">
+                    <div class="flex items-center justify-between">
                         <h3 class="font-orbitron font-bold text-sm sm:text-xl text-white flex items-center space-x-2">
                             <i class="fa-solid fa-gifts text-red-500 mr-2"></i><span>Selecciona tu Videojuego</span>
                         </h3>
-                        <span class="text-[10px] sm:text-xs text-gray-400">Promociones 2026</span>
+                        <span class="text-[10px] sm:text-xs text-gray-400">Elige un juego para recargar</span>
                     </div>
 
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 sm:gap-4">
-                        <button onclick="filterGame('freefire')" class="game-filter-btn group p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-cyber-card border-2 border-red-500 shadow-xmas-glow flex flex-col items-center justify-center space-y-1.5 transition-all" data-game="freefire">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-400 text-xl sm:text-2xl group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-fire-flame-curved"></i>
-                            </div>
-                            <span class="font-orbitron font-bold text-[11px] sm:text-xs text-white text-center">FREE FIRE</span>
-                        </button>
-
-                        <button onclick="filterGame('roblox')" class="game-filter-btn group p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-cyber-card border border-cyber-border hover:border-red-500 flex flex-col items-center justify-center space-y-1.5 transition-all" data-game="roblox">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-red-500/20 flex items-center justify-center text-red-400 text-xl sm:text-2xl group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-cube"></i>
-                            </div>
-                            <span class="font-orbitron font-bold text-[11px] sm:text-xs text-white text-center">ROBLOX</span>
-                        </button>
-
-                        <button onclick="filterGame('mobilelegends')" class="game-filter-btn group p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-cyber-card border border-cyber-border hover:border-red-500 flex flex-col items-center justify-center space-y-1.5 transition-all" data-game="mobilelegends">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 text-xl sm:text-2xl group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-shield-sword"></i>
-                            </div>
-                            <span class="font-orbitron font-bold text-[11px] sm:text-xs text-white text-center">MOBILE LEGENDS</span>
-                        </button>
-
-                        <button onclick="filterGame('codm')" class="game-filter-btn group p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-cyber-card border border-cyber-border hover:border-red-500 flex flex-col items-center justify-center space-y-1.5 transition-all" data-game="codm">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-xl sm:text-2xl group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-crosshairs"></i>
-                            </div>
-                            <span class="font-orbitron font-bold text-[11px] sm:text-xs text-white text-center">COD MOBILE</span>
-                        </button>
-
-                        <button onclick="filterGame('pubg')" class="game-filter-btn group p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-cyber-card border border-cyber-border hover:border-red-500 flex flex-col items-center justify-center space-y-1.5 transition-all col-span-2 sm:col-span-1" data-game="pubg">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-400 text-xl sm:text-2xl group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-plane"></i>
-                            </div>
-                            <span class="font-orbitron font-bold text-[11px] sm:text-xs text-white text-center">PUBG MOBILE</span>
-                        </button>
-                    </div>
+                    <div id="games-grid-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
                 </div>
 
-                <div id="products-container" class="space-y-4 pt-2"></div>
+                <!-- VISTA DE COMPRA DEL JUEGO ELEGIDO (PASO 2: ID, PACK Y PAGO) -->
+                <div id="game-store-workspace" class="hidden space-y-4 pt-2">
+                    <div class="flex items-center justify-between bg-cyber-card border border-cyber-border rounded-2xl px-4 py-3">
+                        <button type="button" onclick="backToGamesGrid()" class="px-3.5 py-2 rounded-xl bg-cyber-dark border border-cyber-border hover:border-red-500 text-xs font-bold text-white flex items-center space-x-2 transition-all">
+                            <i class="fa-solid fa-arrow-left text-red-400"></i>
+                            <span>Elegir otro juego</span>
+                        </button>
+                        <div class="text-right">
+                            <span class="text-[10px] text-gray-400 uppercase font-orbitron block">Juego seleccionado</span>
+                            <span id="workspace-game-title" class="font-orbitron font-black text-sm sm:text-base text-white">FREE FIRE</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+                        <!-- Columna izquierda: 1) ID de juego + 2) Elegir pack -->
+                        <div class="lg:col-span-8 space-y-5">
+                            <div class="bg-cyber-card border border-cyber-border rounded-3xl p-5 sm:p-6 space-y-4 shadow-xl">
+                                <div class="flex flex-wrap items-center justify-between gap-2">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center text-xs font-bold">1</span>
+                                        <h4 class="font-orbitron font-bold text-sm sm:text-base text-white">Tu ID de juego</h4>
+                                    </div>
+                                    <span id="workspace-game-notice" class="text-[11px] text-cyan-300"></span>
+                                </div>
+
+                                <div class="flex flex-col sm:flex-row gap-2.5" id="workspace-id-wrapper">
+                                    <input type="text" id="workspace-player-id" placeholder="Ingresa tu ID de jugador o UID" class="flex-grow bg-cyber-dark border border-cyber-border rounded-xl px-4 py-3 text-white text-sm font-mono focus:outline-none focus:border-emerald-400">
+                                    <input type="text" id="workspace-ml-region" placeholder="Región (4 dígitos)" maxlength="4" class="hidden sm:w-36 bg-cyber-dark border border-cyber-border rounded-xl px-3 py-3 text-white text-sm font-mono focus:outline-none focus:border-emerald-400">
+                                    <button type="button" id="workspace-verify-btn" onclick="verifyWorkspacePlayerId()" class="px-5 py-3 rounded-xl bg-emerald-500 text-black font-bold text-xs uppercase tracking-wider hover:opacity-95 transition-all flex items-center justify-center space-x-2">
+                                        <i class="fa-solid fa-user-check"></i>
+                                        <span>Verificar ID</span>
+                                    </button>
+                                </div>
+
+                                <div id="workspace-player-card" class="hidden p-4 rounded-2xl bg-cyber-dark border border-emerald-500/40 flex items-center justify-between gap-3">
+                                    <div class="flex items-center space-x-3 min-w-0">
+                                        <img id="workspace-player-avatar" src="https://via.placeholder.com/64" alt="Avatar" class="w-12 h-12 rounded-xl object-cover border border-emerald-400/50 flex-shrink-0">
+                                        <div class="truncate">
+                                            <p id="workspace-player-nick" class="font-bold text-white text-sm truncate">Jugador</p>
+                                            <p id="workspace-player-meta" class="text-[11px] text-emerald-400 font-mono truncate">ID verificado</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase flex-shrink-0">Verificado</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-cyber-card border border-cyber-border rounded-3xl p-5 sm:p-6 space-y-4 shadow-xl">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="w-6 h-6 rounded-full bg-red-500/20 text-red-400 border border-red-500/40 flex items-center justify-center text-xs font-bold">2</span>
+                                        <h4 class="font-orbitron font-bold text-sm sm:text-base text-white">Elegí tu pack</h4>
+                                    </div>
+                                    <span class="text-[11px] text-gray-400">Toca un paquete para cotizar</span>
+                                </div>
+
+                                <div id="workspace-packs-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3"></div>
+                            </div>
+                        </div>
+
+                        <!-- Columna derecha: Resumen del pedido, descuento, pago y comprar -->
+                        <aside class="lg:col-span-4 bg-cyber-card border border-cyber-border rounded-3xl p-5 space-y-4 shadow-2xl lg:sticky lg:top-24">
+                            <div class="border-b border-cyber-border pb-3">
+                                <span class="text-[10px] text-emerald-400 uppercase font-bold tracking-wider block">Resumen del pedido</span>
+                                <h4 id="summary-game-label" class="font-orbitron font-black text-base text-white">FREE FIRE</h4>
+                            </div>
+
+                            <div class="space-y-2 text-xs bg-cyber-dark/80 border border-cyber-border rounded-2xl p-3.5">
+                                <div class="flex justify-between gap-2">
+                                    <span class="text-gray-400">Pack</span>
+                                    <span id="summary-pack-name" class="text-white font-bold text-right">Ninguno seleccionado</span>
+                                </div>
+                                <div class="flex justify-between gap-2">
+                                    <span class="text-gray-400">ID / Cuenta</span>
+                                    <span id="summary-player-id" class="text-cyan-300 font-mono text-right truncate max-w-[170px]">—</span>
+                                </div>
+                                <div class="flex justify-between gap-2">
+                                    <span class="text-gray-400">Recompensa</span>
+                                    <span id="summary-points-gain" class="text-cyber-xmasGold font-mono font-bold">+0 Points</span>
+                                </div>
+                                <div class="flex justify-between gap-2 pt-2 border-t border-cyber-border text-sm font-bold">
+                                    <span class="text-white">Total</span>
+                                    <span id="summary-total-price" class="font-orbitron text-emerald-400 text-base">$0.00</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-1.5">
+                                <label class="block text-[10px] font-semibold text-gray-300 uppercase tracking-wider">Código de descuento</label>
+                                <div class="flex space-x-2">
+                                    <input type="text" id="workspace-discount-input" placeholder="Ej. XMAS2026" class="flex-grow bg-cyber-dark border border-cyber-border rounded-xl px-3 py-2 text-white text-xs font-mono uppercase focus:outline-none focus:border-cyber-xmasGold">
+                                    <button type="button" onclick="applyWorkspaceDiscount()" class="px-3 py-2 rounded-xl bg-cyber-xmasGold text-black font-bold text-xs uppercase hover:opacity-90">Aplicar</button>
+                                </div>
+                                <p id="workspace-discount-msg" class="hidden text-[11px] font-mono"></p>
+                            </div>
+
+                            <div class="space-y-2">
+                                <span class="block text-[10px] font-semibold text-gray-300 uppercase tracking-wider">Pagás con</span>
+                                <div class="grid grid-cols-2 gap-2 text-xs">
+                                    <button type="button" onclick="setWorkspacePayment('saldo')" id="ws-pay-saldo" class="p-2.5 rounded-xl bg-cyber-dark border border-cyber-border text-emerald-400 font-bold text-left">Saldo Billetera</button>
+                                    <button type="button" onclick="setWorkspacePayment('transfer')" id="ws-pay-transfer" class="p-2.5 rounded-xl bg-cyber-dark border border-cyber-border text-white font-bold text-left">Transferencia</button>
+                                    <button type="button" onclick="setWorkspacePayment('whatsapp')" id="ws-pay-whatsapp" class="p-2.5 rounded-xl bg-cyber-dark border-2 border-red-500 text-white font-bold text-left">WhatsApp / Chat</button>
+                                    <button type="button" onclick="setWorkspacePayment('paypal')" id="ws-pay-paypal" class="p-2.5 rounded-xl bg-cyber-dark border border-cyber-border text-white font-bold text-left">PayPal</button>
+                                </div>
+                            </div>
+
+                            <div id="workspace-extra-payment-fields" class="hidden space-y-2.5 p-3 rounded-2xl bg-cyber-dark border border-cyber-border text-xs"></div>
+
+                            <button type="button" id="workspace-buy-btn" onclick="submitWorkspacePurchase()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-red-600 to-emerald-600 text-white font-orbitron font-black text-xs uppercase tracking-wider shadow-xmas-glow hover:opacity-95 transition-all">
+                                ELIGE UN PACK PARA COMPRAR
+                            </button>
+
+                            <div class="grid grid-cols-3 gap-2 pt-1 text-[10px] text-gray-400 text-center">
+                                <div class="p-2 rounded-xl bg-cyber-dark/60 border border-cyber-border/60"><i class="fa-solid fa-shield-halved text-emerald-400 block mb-1"></i>Pago seguro</div>
+                                <div class="p-2 rounded-xl bg-cyber-dark/60 border border-cyber-border/60"><i class="fa-solid fa-bolt text-amber-400 block mb-1"></i>Entrega rápida</div>
+                                <div class="p-2 rounded-xl bg-cyber-dark/60 border border-cyber-border/60"><i class="fa-solid fa-headset text-cyan-400 block mb-1"></i>Soporte 24/7</div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
             </section>
 
             <!-- TAB: WALLET / BILLETERA DE SALDO + POINTS -->

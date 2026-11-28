@@ -73,7 +73,7 @@
                     </div>
                     <div>
                         <h1 class="font-orbitron font-black text-xl tracking-wider text-white">ZENITH<span class="text-cyber-neonPink">ADMIN</span></h1>
-                        <p class="text-[10px] text-gray-400 tracking-widest uppercase">Panel de Control & Órdenes</p>
+                        <p class="text-[10px] text-gray-400 tracking-widest uppercase">Panel de Control &amp; Órdenes</p>
                     </div>
                 </div>
 
@@ -417,8 +417,22 @@
                             <input type="number" step="1" min="1" max="100" id="adminDiscountPercent" placeholder="Ej. 15" required class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-4 py-3 text-cyber-neonGreen text-sm font-bold font-orbitron focus:outline-none focus:border-cyber-neonCyan">
                         </div>
                         <div>
-                            <label class="block text-gray-400 mb-1 font-semibold uppercase">A qué cantidad aplica:</label>
-                            <input type="text" id="adminDiscountTarget" placeholder="Ej. 110 Diamantes o Todo" required class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-cyber-neonCyan font-bold">
+                            <label class="block text-gray-400 mb-1 font-semibold uppercase">Juego / Categoría Registrada:</label>
+                            <select id="adminDiscountGame" onchange="onDiscountGameChange(this.value)" required class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-cyber-neonCyan font-bold">
+                                <option value="ALL">Todos los Juegos y Productos</option>
+                                <option value="freefire">Free Fire</option>
+                                <option value="roblox">Roblox</option>
+                                <option value="mobilelegends">Mobile Legends</option>
+                                <option value="codm">Call of Duty Mobile</option>
+                                <option value="pubg">PUBG Mobile</option>
+                                <option value="subscriptions">Suscripciones (Streaming)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 mb-1 font-semibold uppercase">Producto Registrado:</label>
+                            <select id="adminDiscountProduct" required class="w-full bg-cyber-dark border border-cyber-border rounded-xl px-4 py-3 text-cyber-neonCyan text-sm focus:outline-none focus:border-cyber-neonCyan font-bold">
+                                <option value="ALL_PRODUCTS">Todos los productos de todos los juegos</option>
+                            </select>
                         </div>
                         <div>
                             <label class="block text-gray-400 mb-1 font-semibold uppercase">Limitado / Ilimitado:</label>
@@ -1062,6 +1076,9 @@
             const selectedContent = document.getElementById(`tab-content-${tabName}`);
             if (selectedContent) {
                 selectedContent.classList.remove('hidden');
+            }
+            if (tabName === 'discounts' && typeof window.populateDiscountGameAndProducts === 'function') {
+                window.populateDiscountGameAndProducts();
             }
         }
 
